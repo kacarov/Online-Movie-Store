@@ -1,0 +1,12 @@
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\bin\Debug\netcoreapp2.1\OnlineMovieStore.Data.deps.json
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\bin\Debug\netcoreapp2.1\OnlineMovieStore.Data.dll
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.csprojAssemblyReference.cache
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.csproj.CoreCompileInputs.cache
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.AssemblyInfoInputs.cache
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.AssemblyInfo.cs
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\bin\Debug\netcoreapp2.1\OnlineMovieStore.Data.pdb
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.dll
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.pdb
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\bin\Debug\netcoreapp2.1\OnlineMovieStore.Models.dll
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\bin\Debug\netcoreapp2.1\OnlineMovieStore.Models.pdb
+D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Data\obj\Debug\netcoreapp2.1\OnlineMovieStore.Data.csproj.CopyComplete
