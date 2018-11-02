@@ -1,9 +1,0 @@
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\bin\Debug\netcoreapp2.1\OnlineMovieStore.Models.deps.json
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\bin\Debug\netcoreapp2.1\OnlineMovieStore.Models.dll
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\bin\Debug\netcoreapp2.1\OnlineMovieStore.Models.pdb
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\obj\Debug\netcoreapp2.1\OnlineMovieStore.Models.csprojAssemblyReference.cache
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\obj\Debug\netcoreapp2.1\OnlineMovieStore.Models.csproj.CoreCompileInputs.cache
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\obj\Debug\netcoreapp2.1\OnlineMovieStore.Models.AssemblyInfoInputs.cache
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\obj\Debug\netcoreapp2.1\OnlineMovieStore.Models.AssemblyInfo.cs
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\obj\Debug\netcoreapp2.1\OnlineMovieStore.Models.dll
-D:\martin\telericAcademy\Asp.NetCoreProject\OnlineMovieStore\OnlineMovieStore.Models\obj\Debug\netcoreapp2.1\OnlineMovieStore.Models.pdb
