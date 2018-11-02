@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OnlineMovieStore.Data;
 using OnlineMovieStore.Models;
 using OnlineMovieStore.Models.Contracts;
 using OnlineMovieStore.Models.Models;
@@ -13,9 +12,23 @@ namespace OnlineMovieStore.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Actor> Actors { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<WatchedMovies> WatchedMovies { get; set; }
+
+        public DbSet<GenreMovie> GenreMovies { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        { }
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

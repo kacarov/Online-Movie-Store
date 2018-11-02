@@ -155,7 +155,7 @@ namespace OnlineMovieStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actor");
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("OnlineMovieStore.Models.Models.ApplicationUser", b =>
@@ -229,7 +229,7 @@ namespace OnlineMovieStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("OnlineMovieStore.Models.Models.GenreMovie", b =>
@@ -242,7 +242,7 @@ namespace OnlineMovieStore.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("GenreMovie");
+                    b.ToTable("GenreMovies");
                 });
 
             modelBuilder.Entity("OnlineMovieStore.Models.Models.Movie", b =>
@@ -273,12 +273,12 @@ namespace OnlineMovieStore.Data.Migrations
 
                     b.HasIndex("ActorId");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("OnlineMovieStore.Models.Models.Order", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<int>("MovieId");
 
@@ -286,32 +286,24 @@ namespace OnlineMovieStore.Data.Migrations
 
                     b.Property<int>("Id");
 
-                    b.Property<string>("UserId1");
-
                     b.HasKey("UserId", "MovieId");
 
                     b.HasIndex("MovieId");
 
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("OnlineMovieStore.Models.Models.WatchedMovies", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<int>("MovieId");
 
                     b.Property<int>("Id");
 
-                    b.Property<string>("UserId1");
-
                     b.HasKey("UserId", "MovieId");
 
                     b.HasIndex("MovieId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("WatchedMovies");
                 });
@@ -390,8 +382,9 @@ namespace OnlineMovieStore.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OnlineMovieStore.Models.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("OnlineMovieStore.Models.Models.WatchedMovies", b =>
@@ -402,8 +395,9 @@ namespace OnlineMovieStore.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OnlineMovieStore.Models.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
+                        .WithMany("WatchedMovies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

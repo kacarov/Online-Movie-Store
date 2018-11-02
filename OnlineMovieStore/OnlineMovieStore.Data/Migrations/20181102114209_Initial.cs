@@ -9,6 +9,25 @@ namespace OnlineMovieStore.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Actors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    FirstName = table.Column<string>(maxLength: 25, nullable: false),
+                    LastName = table.Column<string>(maxLength: 25, nullable: false),
+                    Age = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -45,6 +64,49 @@ namespace OnlineMovieStore.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Genres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genres", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Movies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(maxLength: 40, nullable: false),
+                    Year = table.Column<short>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
+                    ActorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Movies_Actors_ActorId",
+                        column: x => x.ActorId,
+                        principalTable: "Actors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,8 +155,8 @@ namespace OnlineMovieStore.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -138,8 +200,8 @@ namespace OnlineMovieStore.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -147,6 +209,81 @@ namespace OnlineMovieStore.Data.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GenreMovies",
+                columns: table => new
+                {
+                    MovieId = table.Column<int>(nullable: false),
+                    GenreId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GenreMovies", x => new { x.MovieId, x.GenreId });
+                    table.ForeignKey(
+                        name: "FK_GenreMovies_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GenreMovies_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    MovieId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => new { x.UserId, x.MovieId });
+                    table.ForeignKey(
+                        name: "FK_Orders_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WatchedMovies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    MovieId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WatchedMovies", x => new { x.UserId, x.MovieId });
+                    table.ForeignKey(
+                        name: "FK_WatchedMovies_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WatchedMovies_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -191,6 +328,26 @@ namespace OnlineMovieStore.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GenreMovies_GenreId",
+                table: "GenreMovies",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movies_ActorId",
+                table: "Movies",
+                column: "ActorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_MovieId",
+                table: "Orders",
+                column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WatchedMovies_MovieId",
+                table: "WatchedMovies",
+                column: "MovieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +368,28 @@ namespace OnlineMovieStore.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "GenreMovies");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "WatchedMovies");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Genres");
+
+            migrationBuilder.DropTable(
+                name: "Movies");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Actors");
         }
     }
 }
