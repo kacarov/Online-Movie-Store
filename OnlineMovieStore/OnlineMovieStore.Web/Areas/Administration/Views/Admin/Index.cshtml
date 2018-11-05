@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Mvc
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 align="center">Admin Panel</h1>
+
+<div class="center">
+    <input type="button" value="Movies" onclick="location.href='@Url.Action("Movies", "Admin")'" />
+</div>
+
+<div class="right">
+    <input type="button" value="Users" onclick="location.href='@Url.Action("Users", "Admin")'" />
+</div>
+
+
+<div class="row" align="center">
+    <div class="col-sm-4">Last 10 Movies</div>
+    <div class="col-sm-4">Last 10 Users</div>
+    <div class="col-sm-4">Last 10 Sales</div>
+</div>
+
+

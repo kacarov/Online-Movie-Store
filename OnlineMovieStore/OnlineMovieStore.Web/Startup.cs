@@ -76,6 +76,14 @@ namespace OnlineMovieStore.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                  name: "admin",
+                  template: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+                );
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

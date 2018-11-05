@@ -15,4 +15,9 @@
     <ProjectReference Include="..\OnlineMovieStore.Data\OnlineMovieStore.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
+  </ItemGroup>
+
 </Project>
