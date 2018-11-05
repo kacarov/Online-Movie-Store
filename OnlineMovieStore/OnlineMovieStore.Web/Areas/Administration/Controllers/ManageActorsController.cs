@@ -9,7 +9,12 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class ManageActorsController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Actors()
+        {
+            return View();
+        }
+
+        public IActionResult AddActor()
         {
             return View();
         }

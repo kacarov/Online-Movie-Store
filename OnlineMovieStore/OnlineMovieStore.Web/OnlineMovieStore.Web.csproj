@@ -22,9 +22,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Views\ManageActors\" />
-    <Folder Include="Areas\Administration\Views\ManageGenres\" />
-  </ItemGroup>
-
 </Project>

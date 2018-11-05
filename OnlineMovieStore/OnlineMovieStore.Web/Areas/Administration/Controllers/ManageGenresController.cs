@@ -9,7 +9,12 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class ManageGenresController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Genres()
+        {
+            return View();
+        }
+
+        public IActionResult AddGenre()
         {
             return View();
         }
