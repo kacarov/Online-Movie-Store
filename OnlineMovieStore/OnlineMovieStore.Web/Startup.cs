@@ -16,6 +16,8 @@ using OnlineMovieStore.Models;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Web.Areas.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using OnlineMovieStore.Services.Contracts;
+using OnlineMovieStore.Services.Services;
 
 namespace OnlineMovieStore.Web
 {
@@ -49,6 +51,7 @@ namespace OnlineMovieStore.Web
             services.AddScoped<UserManager<ApplicationUser>>();
 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IMoviesService, MoviesService>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

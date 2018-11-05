@@ -19,7 +19,7 @@ namespace OnlineMovieStore.Services.Services
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Movie AddMovie(string image, string title, short year, List<string> genre, string actorFirstName, string actorLastName, double price)
+        public Movie AddMovie(string image, string title, short year, List<Genre> genres, int actorId, double price)
         {
 
             if(image == null)
@@ -37,25 +37,6 @@ namespace OnlineMovieStore.Services.Services
                 throw new ArgumentOutOfRangeException("Title lenght cannot be more than 40 symbols!");
             }
 
-            if(actorFirstName == null)
-            {
-                throw new ArgumentNullException("Actor first name cannot be null!");
-            }
-
-            if (actorFirstName.Length > 25)
-            {
-                throw new ArgumentOutOfRangeException("Actor first name cannot be more than 25 symbols!");
-            }
-
-            if(actorLastName == null)
-            {
-                throw new ArgumentNullException("Actor last name cannot be null!");
-            }
-
-            if (actorLastName.Length > 25)
-            {
-                throw new ArgumentOutOfRangeException("Actor last name cannot be more than 25 symbols!");
-            }
 
             var movie = this.context.Movies
               .FirstOrDefault(m => m.Title == title);
@@ -65,41 +46,18 @@ namespace OnlineMovieStore.Services.Services
                 throw new EntityNotFoundException($"Movie with title {title} already exists!");
             }
 
-            var actor = this.context.Actors
-               .FirstOrDefault(a => a.FirstName == actorFirstName && a.LastName == actorLastName);
-
-            if (actor == null)
-            {
-                throw new EntryPointNotFoundException($"Actor with name {actorFirstName} {actorLastName}");
-            }
-
-            List<Genre> genres = new List<Genre>();
-            if (genre.Count > 0)
-            {
-                foreach (var g in genre)
-                {
-                    var gen = this.context.Genres
-                        .FirstOrDefault(mg => mg.Name == g);
-
-                    if (gen == null)
-                    {
-                        throw new EntryPointNotFoundException($"Genre with name {g} does not exist!");
-                    }
-
-                    genres.Add(gen);
-                }
-            }
-
             movie = new Movie
             {
                 Title = title,
                 Year = year,
                 Price = price,
-                ActorId = actor.Id
+                ActorId = actorId,
+                Image = image
 
             };
 
             this.context.Movies.Add(movie);
+
             foreach (var g in genres)
             {
                 this.context.GenreMovies.Add(new GenreMovie
@@ -140,7 +98,7 @@ namespace OnlineMovieStore.Services.Services
             return movie;
         }
 
-        public List<Movie> ListAllMovies()
+        public IEnumerable<Movie> ListAllMovies()
         {
             var moviesQuery = this.context.Movies
                 .AsQueryable();
@@ -162,7 +120,7 @@ namespace OnlineMovieStore.Services.Services
             }
         }
 
-        public List<Movie> ListMoviesByActor(string firstName, string lastName)
+        public IEnumerable<Movie> ListMoviesByActor(string firstName, string lastName)
         {
             
             if(firstName == null)
@@ -206,7 +164,7 @@ namespace OnlineMovieStore.Services.Services
             }
         }
 
-        public List<Movie> ListMoviesByTitle(string title)
+        public IEnumerable<Movie> ListMoviesByTitle(string title)
         {
 
             if (title == null)
@@ -241,7 +199,7 @@ namespace OnlineMovieStore.Services.Services
 
         }
 
-        public List<Movie> ListMoviesByYear(short year)
+        public IEnumerable<Movie> ListMoviesByYear(short year)
         {
 
             if (year < 1800 || year > 9999)
@@ -352,7 +310,7 @@ namespace OnlineMovieStore.Services.Services
             return "You have succesfully added movie to your collection.";
         }
         //TODO: NEEDS USER INFO2
-        public List<Movie> ListMyMovies()
+        public IEnumerable<Movie> ListMyMovies()
         {
             /*var user = this.unitOfWork.GetRepo<User>().All()
                 .FirstOrDefault(u => u.Username == this.userSession.user.Username);

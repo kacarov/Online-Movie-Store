@@ -13,12 +13,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineMovieStore.Data\OnlineMovieStore.Data.csproj" />
+    <ProjectReference Include="..\OnlineMovieStore.Services\OnlineMovieStore.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Areas\Administration\Views\_ViewImports.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Views\ManageActors\" />
+    <Folder Include="Areas\Administration\Views\ManageGenres\" />
   </ItemGroup>
 
 </Project>

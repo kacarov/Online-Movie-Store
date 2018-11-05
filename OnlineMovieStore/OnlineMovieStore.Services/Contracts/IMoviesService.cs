@@ -6,15 +6,15 @@ namespace OnlineMovieStore.Services.Contracts
 {
     public interface IMoviesService
     {
-        Movie AddMovie(string image, string title, short year, List<string> genre, string actorFirstName, string actorLastName, double price);
+        Movie AddMovie(string image, string title, short year, List<Genre> genres, int actorId, double price);
 
-        List<Movie> ListAllMovies();
+        IEnumerable<Movie> ListAllMovies();
 
-        List<Movie> ListMoviesByActor(string firstName, string lastName);
+        IEnumerable<Movie> ListMoviesByActor(string firstName, string lastName);
 
-        List<Movie> ListMoviesByTitle(string name);
+        IEnumerable<Movie> ListMoviesByTitle(string name);
 
-        List<Movie> ListMoviesByYear(short year);
+        IEnumerable<Movie> ListMoviesByYear(short year);
 
         Movie UpdateMoviePrice(string title, double price);
 
@@ -22,6 +22,6 @@ namespace OnlineMovieStore.Services.Contracts
 
         string BuyMovie(string movieTitle);
 
-        List<Movie> ListMyMovies();
+        IEnumerable<Movie> ListMyMovies();
     }
 }
