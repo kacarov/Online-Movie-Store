@@ -8,6 +8,10 @@ namespace OnlineMovieStore.Models.Models
 {
     public class Movie : Entity
     {
+
+        [Required]
+        public string Image { get; set; }
+
         [Required]
         [MaxLength(40)]
         public string Title { get; set; }
