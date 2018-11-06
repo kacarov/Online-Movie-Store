@@ -5,6 +5,6 @@ namespace OnlineMovieStore.Services.Contracts
 {
     public interface IUsersService
     {
-        IEnumerable<Order> Orders();
+        IEnumerable<Movie> Orders(string id);
     }
 }

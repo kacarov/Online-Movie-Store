@@ -6,11 +6,11 @@ namespace OnlineMovieStore.Web.Models
 {
     public class OrderViewModel
     {
-        public IEnumerable<Movie> content;
+        public IEnumerable<MoviesViewModel> content;
 
-        public OrderViewModel(IEnumerable<Order> content)
+        public OrderViewModel(IEnumerable<Movie> content)
         {
-            this.content = content.Select(x => new Movie());
+            this.content = content.Select(m => new MoviesViewModel(m));
         }
     }
 }
