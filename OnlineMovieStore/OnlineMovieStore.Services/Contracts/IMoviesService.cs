@@ -12,7 +12,7 @@ namespace OnlineMovieStore.Services.Contracts
 
         IEnumerable<Movie> ListMoviesByActor(string firstName, string lastName);
 
-        IEnumerable<Movie> ListMoviesByTitle(string name);
+        Movie ListMoviesByTitle(string name);
 
         IEnumerable<Movie> ListMoviesByYear(short year);
 

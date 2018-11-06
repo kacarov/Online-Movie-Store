@@ -4,15 +4,27 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Web.Models;
 
 namespace OnlineMovieStore.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMoviesService moviesService;
+
+        public HomeController(IMoviesService moviesService)
+        {
+            this.moviesService = moviesService ?? throw new ArgumentNullException(nameof(moviesService));
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var movies = this.moviesService
+                .ListAllMovies()
+                .Take(10);
+
+            return View(new HomePageViewModel(movies));
         }
 
         public IActionResult About()

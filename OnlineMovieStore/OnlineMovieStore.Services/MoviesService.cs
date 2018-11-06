@@ -164,7 +164,7 @@ namespace OnlineMovieStore.Services.Services
             }
         }
 
-        public IEnumerable<Movie> ListMoviesByTitle(string title)
+        public Movie ListMoviesByTitle(string title)
         {
 
             if (title == null)
@@ -186,11 +186,11 @@ namespace OnlineMovieStore.Services.Services
                    .ThenInclude(mg => mg.Genre)
                .Where(m => m.Title == title);
 
-            var movies = moviesQuery.ToList();
+            var movie = moviesQuery.ToList()[0];
 
-            if (movies != null && movies.Count != 0)
+            if (movie != null)
             {
-                return movies;
+                return movie;
             }
             else
             {
