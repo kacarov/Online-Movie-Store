@@ -8,7 +8,7 @@
 
 <div class="text-center">
     <h2>@Model.Title<span>(@Model.Year)</span></h2>
-    <img src="@Model.Image" class="text-center img-rounded" alt="...">
+    <img src="@Model.Image" class="text-center img-rounded" style="max-height: 500px; max-width: 500px;" alt="...">
 
     <div>
         <h4>
@@ -23,6 +23,9 @@
         <h4>
             Price: @Model.Price$
         </h4>
+    </div>
+    <div>
+        <button type="button" class="btn btn-secondary btn-lg">Buy movie</button>
     </div>
 </div>
 
