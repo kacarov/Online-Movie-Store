@@ -6,7 +6,6 @@ using OnlineMovieStore.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OnlineMovieStore.Services.Services
 {
@@ -21,22 +20,20 @@ namespace OnlineMovieStore.Services.Services
 
         public Movie AddMovie(string image, string title, short year, List<Genre> genres, int actorId, double price)
         {
-
-            if(image == null)
+            if (image == null)
             {
                 throw new ArgumentNullException("Image cannot be null!");
             }
 
-            if(title == null)
+            if (title == null)
             {
                 throw new ArgumentNullException("Title cannot be null!");
             }
 
-            if(title.Length > 40)
+            if (title.Length > 40)
             {
                 throw new ArgumentOutOfRangeException("Title lenght cannot be more than 40 symbols!");
             }
-
 
             var movie = this.context.Movies
               .FirstOrDefault(m => m.Title == title);
@@ -53,7 +50,6 @@ namespace OnlineMovieStore.Services.Services
                 Price = price,
                 ActorId = actorId,
                 Image = image
-
             };
 
             this.context.Movies.Add(movie);
@@ -122,18 +118,17 @@ namespace OnlineMovieStore.Services.Services
 
         public IEnumerable<Movie> ListMoviesByActor(string firstName, string lastName)
         {
-            
-            if(firstName == null)
+            if (firstName == null)
             {
                 throw new ArgumentNullException("Firt name cannot be null!");
             }
 
-            if(firstName.Length > 25)
+            if (firstName.Length > 25)
             {
                 throw new ArgumentOutOfRangeException("Fist name cannot be longer than 25 symbols!");
             }
 
-            if(lastName == null)
+            if (lastName == null)
             {
                 throw new ArgumentNullException("Last name cannot be null!");
             }
@@ -166,13 +161,12 @@ namespace OnlineMovieStore.Services.Services
 
         public Movie ListMoviesByTitle(string title)
         {
-
             if (title == null)
             {
                 throw new ArgumentNullException("Title cannot be null");
             }
 
-            if(title.Length > 40)
+            if (title.Length > 40)
             {
                 throw new ArgumentOutOfRangeException("Title length cannot be more than 40 symbols");
             }
@@ -196,12 +190,10 @@ namespace OnlineMovieStore.Services.Services
             {
                 throw new EntityNotFoundException("Cannot find movies with this filter!");
             }
-
         }
 
         public IEnumerable<Movie> ListMoviesByYear(short year)
         {
-
             if (year < 1800 || year > 9999)
             {
                 throw new ArgumentOutOfRangeException("Year must be in between 1800 and 9999");
@@ -240,7 +232,7 @@ namespace OnlineMovieStore.Services.Services
                 throw new ArgumentOutOfRangeException("Title lenght cannot be more than 40 symbols!");
             }
 
-            if(price < 1 || price > 200)
+            if (price < 1 || price > 200)
             {
                 throw new ArgumentOutOfRangeException("Price must be between 1 and 200$!");
             }
@@ -276,39 +268,39 @@ namespace OnlineMovieStore.Services.Services
             var movie = this.context.Movies
                 .FirstOrDefault(m => m.Title == movieTitle);
 
-
             if (movie == null)
             {
                 throw new EntityNotFoundException($"Movie with title {movieTitle} already exists!");
             }
 
-          /*  var user = this.unitOfWork.GetRepo<User>().All()
-                .FirstOrDefault(u => u.Username == this.userSession.user.Username);
+            /*  var user = this.unitOfWork.GetRepo<User>().All()
+                  .FirstOrDefault(u => u.Username == this.userSession.user.Username);
 
-            if (user.Balance < movie.Price)
-            {
-                throw new ArgumentException("You don't have enough money to buy this movie!");
-            }
+              if (user.Balance < movie.Price)
+              {
+                  throw new ArgumentException("You don't have enough money to buy this movie!");
+              }
 
-            this.context.WatchedMovies.Add(new WatchedMovies
-            {
-                UserId = user.Id,
-                MovieId = movie.Id
-            });
+              this.context.WatchedMovies.Add(new WatchedMovies
+              {
+                  UserId = user.Id,
+                  MovieId = movie.Id
+              });
 
-            this.context.Orders.Add(new Order
-            {
-                UserId = user.Id,
-                MovieId = movie.Id,
-                Date = DateTime.Now
-            });
+              this.context.Orders.Add(new Order
+              {
+                  UserId = user.Id,
+                  MovieId = movie.Id,
+                  Date = DateTime.Now
+              });
 
-            user.Balance -= movie.Price;
+              user.Balance -= movie.Price;
 
-            this.context.SaveChanges();
-            */
+              this.context.SaveChanges();
+              */
             return "You have succesfully added movie to your collection.";
         }
+
         //TODO: NEEDS USER INFO2
         public IEnumerable<Movie> ListMyMovies()
         {

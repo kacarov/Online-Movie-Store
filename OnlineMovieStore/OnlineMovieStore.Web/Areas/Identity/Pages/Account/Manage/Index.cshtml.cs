@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OnlineMovieStore.Models;
 using OnlineMovieStore.Models.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace OnlineMovieStore.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -42,6 +39,10 @@ namespace OnlineMovieStore.Web.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
+            //TODO: Validate Username
+            public string UserName { get; set; }
+
+            [Required]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -66,6 +67,7 @@ namespace OnlineMovieStore.Web.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                UserName = userName,
                 Email = email,
                 PhoneNumber = phoneNumber
             };
@@ -127,7 +129,6 @@ namespace OnlineMovieStore.Web.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
 
             var userId = await _userManager.GetUserIdAsync(user);
             var email = await _userManager.GetEmailAsync(user);
