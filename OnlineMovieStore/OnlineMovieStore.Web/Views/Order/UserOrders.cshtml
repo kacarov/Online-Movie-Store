@@ -1,0 +1,15 @@
+﻿@model OnlineMovieStore.Web.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    @{ foreach (var movie in Model.content)
+        {
+            <div class="well col-sm-4">
+                <h3>@movie.Title</h3>
+            </div>
+        }
+    }
+</div>

@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OnlineMovieStore.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineMovieStore.Models;
 using OnlineMovieStore.Models.Models;
-using OnlineMovieStore.Web.Areas.Identity.Services;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using OnlineMovieStore.Services;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Services.Services;
+using OnlineMovieStore.Web.Areas.Identity.Services;
+using OnlineMovieStore.Web.Data;
 
 namespace OnlineMovieStore.Web
 {
@@ -51,8 +46,9 @@ namespace OnlineMovieStore.Web
             services.AddScoped<UserManager<ApplicationUser>>();
 
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<IMoviesService, MoviesService>();
 
+            services.AddScoped<IMoviesService, MoviesService>();
+            services.AddScoped<IUsersService, UserService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

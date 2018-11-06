@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMovieStore.Data", "On
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMovieStore.Models", "OnlineMovieStore.Models\OnlineMovieStore.Models.csproj", "{DC6A0003-6E20-4607-9637-4DAC47D24D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMovieStore.Services", "OnlineMovieStore.Services\OnlineMovieStore.Services.csproj", "{5598D0F4-39E5-4908-9B94-9FADBEA66B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMovieStore.Services", "OnlineMovieStore.Services\OnlineMovieStore.Services.csproj", "{5598D0F4-39E5-4908-9B94-9FADBEA66B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
