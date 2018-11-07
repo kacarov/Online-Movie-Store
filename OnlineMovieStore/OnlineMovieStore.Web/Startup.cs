@@ -11,6 +11,7 @@ using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Services.Services;
+using OnlineMovieStore.Services.Services.Contracts;
 using OnlineMovieStore.Web.Areas.Identity.Services;
 using OnlineMovieStore.Web.Data;
 
@@ -49,6 +50,7 @@ namespace OnlineMovieStore.Web
 
             services.AddScoped<IMoviesService, MoviesService>();
             services.AddScoped<IUsersService, UserService>();
+            services.AddScoped<IActorsService, ActorsService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
