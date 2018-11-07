@@ -11,10 +11,11 @@ using OnlineMovieStore.Web.Areas.Administration.Models;
 using OnlineMovieStore.Web.Data;
 
 namespace OnlineMovieStore.Web.Areas.Administration.Controllers
-{
+{ 
     [Area("Administration")]
     public class ManageMoviesController : Controller
     {
+        private const int pageSize = 1;
         private ApplicationDbContext context;
         private IMoviesService movieService;
 
@@ -24,9 +25,20 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             this.movieService = movie;
         }
 
-        public IActionResult Movies()
+        public IActionResult Movies(MoviesIndexViewModel model)
         {
-            return View();
+            if (model.SearchText == null)
+            {
+                model.TotalPages = (int)Math.Ceiling(this.movieService.Total() / (double)pageSize);
+                model.Movies = this.movieService.ListAllMovies(model.Page, pageSize);
+            }
+            else
+            {
+                model.TotalPages = (int)Math.Ceiling(this.movieService.TotalContainingText(model.SearchText) / (double)pageSize);
+                model.Movies = this.movieService.ListByContainingText(model.SearchText, model.Page, pageSize);
+            }
+
+            return View(model);
         }
 
         public IActionResult AddMovie()
