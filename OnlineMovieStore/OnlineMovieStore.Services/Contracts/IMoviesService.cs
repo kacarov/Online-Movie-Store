@@ -23,5 +23,7 @@ namespace OnlineMovieStore.Services.Contracts
         string BuyMovie(string movieTitle);
 
         IEnumerable<Movie> ListMyMovies();
+
+        int Total();
     }
 }

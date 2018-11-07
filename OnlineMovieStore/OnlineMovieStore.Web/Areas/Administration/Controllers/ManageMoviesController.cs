@@ -11,10 +11,11 @@ using OnlineMovieStore.Web.Areas.Administration.Models;
 using OnlineMovieStore.Web.Data;
 
 namespace OnlineMovieStore.Web.Areas.Administration.Controllers
-{
+{ 
     [Area("Administration")]
     public class ManageMoviesController : Controller
     {
+        private const int pageSize = 1;
         private ApplicationDbContext context;
         private IMoviesService movieService;
 
@@ -26,7 +27,8 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
 
         public IActionResult Movies(MoviesIndexViewModel model)
         {
-            model.Movies = this.movieService.ListAllMovies(1, 10);
+            model.TotalPages = (int)Math.Ceiling(this.movieService.Total() / (double)pageSize);
+            model.Movies = this.movieService.ListAllMovies(model.Page, pageSize);
 
             return View(model);
         }

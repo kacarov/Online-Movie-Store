@@ -340,5 +340,10 @@ namespace OnlineMovieStore.Services.Services
             }*/
             return new List<Movie>();
         }
+
+        public int Total()
+        {
+            return this.context.Movies.Count();
+        }
     }
 }

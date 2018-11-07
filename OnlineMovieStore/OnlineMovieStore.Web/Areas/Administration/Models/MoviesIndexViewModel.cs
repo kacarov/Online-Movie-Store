@@ -10,13 +10,13 @@ namespace OnlineMovieStore.Web.Areas.Administration.Models
     {
         public int TotalPages { get; set; }
 
-        public int CurrentPage { get; set; } = 1;
+        public int Page { get; set; } = 1;
 
-        public int PreviousPage => this.CurrentPage == 
-            1 ? 1 : this.CurrentPage - 1;
+        public int PreviousPage => this.Page == 
+            1 ? 1 : this.Page - 1;
 
-        public int NextPage => this.CurrentPage == 
-            this.TotalPages ? this.TotalPages : this.CurrentPage + 1;
+        public int NextPage => this.Page == 
+            this.TotalPages ? this.TotalPages : this.Page + 1;
 
         public IEnumerable<Movie> Movies { get; set; }
     }
