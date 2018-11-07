@@ -19,5 +19,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Models
             this.TotalPages ? this.TotalPages : this.Page + 1;
 
         public IEnumerable<Movie> Movies { get; set; }
+
+        public string SearchText { get; set; } = string.Empty;
     }
 }

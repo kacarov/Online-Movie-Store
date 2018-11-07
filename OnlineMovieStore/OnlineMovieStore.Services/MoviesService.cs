@@ -345,5 +345,15 @@ namespace OnlineMovieStore.Services.Services
         {
             return this.context.Movies.Count();
         }
+
+        public IEnumerable<Movie> ListByContainingText(string searchText, int page = 1, int pageSize = 10)
+        {
+            return this.context.Movies.Where(m => m.Title.Contains(searchText)).OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public int TotalContainingText(string searchText)
+        {
+            return this.context.Movies.Where(m => m.Title.Contains(searchText)).ToList().Count();
+        }
     }
 }

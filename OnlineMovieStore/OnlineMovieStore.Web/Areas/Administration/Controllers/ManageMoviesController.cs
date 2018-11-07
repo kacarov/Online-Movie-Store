@@ -27,8 +27,16 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
 
         public IActionResult Movies(MoviesIndexViewModel model)
         {
-            model.TotalPages = (int)Math.Ceiling(this.movieService.Total() / (double)pageSize);
-            model.Movies = this.movieService.ListAllMovies(model.Page, pageSize);
+            if (model.SearchText == null)
+            {
+                model.TotalPages = (int)Math.Ceiling(this.movieService.Total() / (double)pageSize);
+                model.Movies = this.movieService.ListAllMovies(model.Page, pageSize);
+            }
+            else
+            {
+                model.TotalPages = (int)Math.Ceiling(this.movieService.TotalContainingText(model.SearchText) / (double)pageSize);
+                model.Movies = this.movieService.ListByContainingText(model.SearchText, model.Page, pageSize);
+            }
 
             return View(model);
         }
