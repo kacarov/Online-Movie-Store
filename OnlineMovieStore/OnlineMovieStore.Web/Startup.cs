@@ -51,6 +51,7 @@ namespace OnlineMovieStore.Web
             services.AddScoped<IMoviesService, MoviesService>();
             services.AddScoped<IUsersService, UserService>();
             services.AddScoped<IActorsService, ActorsService>();
+            services.AddScoped<IGenresService, GenresService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
