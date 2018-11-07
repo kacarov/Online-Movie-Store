@@ -42,6 +42,15 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult AddMovie(AddMovieViewModel vm)
         {
+            if (!this.ModelState.IsValid)
+            {
+                List<Actor> actors = this.context.Actors.ToList();
+                List<Genre> genre = this.context.Genres.ToList();
+
+                AddMovieViewModel model = new AddMovieViewModel(actors, genre);
+
+                return View(model);
+            }
 
             List<Genre> genres = new List<Genre>();
 
@@ -55,8 +64,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
 
             this.movieService.AddMovie(vm.ImageURL, vm.Title, vm.Year, genres, int.Parse(vm.ActorId), vm.Price);
 
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return Content("Message sent!", MediaTypeNames.Text.Plain);
+            return RedirectToAction("Movies", "ManageMovies");
         }
     }
 }
