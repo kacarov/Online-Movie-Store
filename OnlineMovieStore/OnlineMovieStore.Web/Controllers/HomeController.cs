@@ -24,7 +24,7 @@ namespace OnlineMovieStore.Web.Controllers
                 .ListAllMovies()
                 .Take(10);
 
-            return View(new HomePageViewModel(movies));
+            return View(new AllMoviesViewModel(movies));
         }
 
         public IActionResult About()

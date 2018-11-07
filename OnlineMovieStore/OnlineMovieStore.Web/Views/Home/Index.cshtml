@@ -1,4 +1,4 @@
-﻿@model HomePageViewModel
+﻿@model AllMoviesViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,6 +7,19 @@
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="item active"> <img src="http://placehold.it/1600x700?text=Product+01"> </div>
+            @foreach (var movie in Model.Movies)
+            {
+
+                <div class="item">
+                    <img src="@movie.Image" alt="Visual Studio" style="max-height: 500px" ; class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+
+                        <a class="btn btn-default" asp-controller="Movies" asp-action="Details" asp-route-title="@movie.Title">
+                            Movie Details
+                        </a>
+                    </div>
+                </div>
+            }
             <div class="item"> <img src="http://placehold.it/1600x700?text=Product+02"> </div>
             <div class="item"> <img src="http://placehold.it/1600x700?text=Product+03"> </div>
             <div class="item"> <img src="http://placehold.it/1600x700?text=Product+04"> </div>

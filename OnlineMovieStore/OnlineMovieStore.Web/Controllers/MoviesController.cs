@@ -18,9 +18,11 @@ namespace OnlineMovieStore.Web.Controllers
             this.moviesService = moviesService ?? throw new ArgumentNullException(nameof(moviesService));
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page, string search)
         {
-            return View();
+            var movies = this.moviesService.ListAllMovies();
+
+            return View(new AllMoviesViewModel(movies));
         }
 
         public IActionResult Details(string title)
@@ -29,5 +31,9 @@ namespace OnlineMovieStore.Web.Controllers
 
             return View(new MoviesViewModel(movie));
         }
+
+        
+       // [HttpPost]
+     //   public IActionResult FindMovieByTitle(Movi)
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlineMovieStore.Web.Models
 {
-    public class HomePageViewModel
+    public class AllMoviesViewModel
     {
-        public HomePageViewModel(IEnumerable<Movie> movies)
+        public AllMoviesViewModel(IEnumerable<Movie> movies)
         {
             Movies = movies.Select(m => new MoviesViewModel(m)); 
         }

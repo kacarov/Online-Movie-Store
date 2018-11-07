@@ -7,3 +7,8 @@ $(document).ready(function () {
         interval: 10000
     })
 });
+
+$(document).ready(function () {
+    debugger;
+    $('#example').DataTable();
+});

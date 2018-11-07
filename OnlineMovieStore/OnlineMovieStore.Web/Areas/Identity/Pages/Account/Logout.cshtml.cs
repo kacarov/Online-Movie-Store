@@ -36,7 +36,7 @@ namespace OnlineMovieStore.Web.Areas.Identity.Pages.Account
             }
             else
             {
-                return Page();
+                return RedirectToAction("Logout", "Account", new { area = "Identity" });
             }
         }
     }
