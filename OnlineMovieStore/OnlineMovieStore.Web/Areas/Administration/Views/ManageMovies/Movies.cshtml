@@ -40,7 +40,7 @@
         </li>
         @for (int i = 1; i <= Model.TotalPages; i++)
         {
-            <li class="page-item"><a class="page-link" href="/administration/ManageMovies/Movies?page=@i">@i</a></li>
+            <li class="page-item"><a class="page-link" href="/administration/ManageMovies/Movies?searchtext=@Model.SearchText&page=@i">@i</a></li>
         }
         <li class="page-item">
             <a class="page-link @nextDisabled" href="/administration/ManageMovies/Movies?searchtext=@Model.SearchText&page=@Model.NextPage" aria-label="Next">
