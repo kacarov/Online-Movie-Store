@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace OnlineMovieStore.Web.Models
 {
-    public class OrderViewModel
+    public class UserMoviesViewModel
     {
         public IEnumerable<MoviesViewModel> content;
 
-        public OrderViewModel(IEnumerable<Movie> content)
+        public UserMoviesViewModel(IEnumerable<Movie> content)
         {
             this.content = content.Select(m => new MoviesViewModel(m));
         }

@@ -19,14 +19,14 @@ namespace OnlineMovieStore.Services.Services
         public Genre AddGenre(string name)
         {
 
-            if (name == null)
-            {
-                throw new ArgumentNullException("Genre name cannot be null!");
-            }
-            if (name.Length > 20)
-            {
-                throw new ArgumentOutOfRangeException("Genre name length cannot be more than 20 symbols!");
-            }
+            //if (name == null)
+            //{
+            //    throw new ArgumentNullException("Genre name cannot be null!");
+            //}
+            //if (name.Length > 20)
+            //{
+            //    throw new ArgumentOutOfRangeException("Genre name length cannot be more than 20 symbols!");
+            //}
 
             var genre = this.context.Genres
                 .FirstOrDefault(g => g.Name == name);
