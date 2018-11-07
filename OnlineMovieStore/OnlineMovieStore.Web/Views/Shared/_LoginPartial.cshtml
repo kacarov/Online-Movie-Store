@@ -10,8 +10,8 @@
             <button asp-action="Index" asp-controller="Home" class="dropbtn">@UserManager.GetUserName(User) </button>
 
             <ul class="dropdown-content  list-group">
-                <li class="list-group-item"><a asp-area="Identity" asp-page="" title="Manage">My Movies</a></li>
-                <li class="list-group-item"> <a asp-action="UserOrders" asp-controller="Order" asp-route-id="@UserManager.GetUserId(User)">Orders</a></li>
+
+                <li class="list-group-item"> <a asp-action="MyMovies" asp-controller="User" asp-route-id="@UserManager.GetUserId(User)">My Movies</a></li>
                 <li class="list-group-item"> <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a></li>
                 <li class="list-group-item"><a asp-area="Identity" asp-page="" title="Manage">Request</a></li>
                 <li class="list-group-item"><a asp-area="Identity" asp-page="" title="Manage">Help Center</a></li>
