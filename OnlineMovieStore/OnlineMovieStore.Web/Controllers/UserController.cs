@@ -26,5 +26,17 @@ namespace OnlineMovieStore.Web.Controllers
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult RequestMovie()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Help()
+        {
+            return View();
+        }
     }
 }
