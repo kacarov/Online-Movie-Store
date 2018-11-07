@@ -94,26 +94,9 @@ namespace OnlineMovieStore.Services.Services
             return movie;
         }
 
-        public IEnumerable<Movie> ListAllMovies()
+        public IEnumerable<Movie> ListAllMovies(int page = 1, int pageSize = 10)
         {
-            var moviesQuery = this.context.Movies
-                .AsQueryable();
-
-            moviesQuery = moviesQuery
-                .Include(m => m.Actor)
-                .Include(m => m.Genres)
-                    .ThenInclude(mg => mg.Genre);
-
-            var movies = moviesQuery.ToList();
-
-            if (movies != null && movies.Count != 0)
-            {
-                return movies;
-            }
-            else
-            {
-                throw new EntityNotFoundException("Cannot find movies with this filter!");
-            }
+            return this.context.Movies.OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public IEnumerable<Movie> ListAllMovies(int page, string search)

@@ -8,7 +8,7 @@ namespace OnlineMovieStore.Services.Contracts
     {
         Movie AddMovie(string image, string title, short year, List<Genre> genres, int actorId, double price);
 
-        IEnumerable<Movie> ListAllMovies();
+        IEnumerable<Movie> ListAllMovies(int page = 1, int pageSize = 10);
 
         IEnumerable<Movie> ListMoviesByActor(string firstName, string lastName);
 

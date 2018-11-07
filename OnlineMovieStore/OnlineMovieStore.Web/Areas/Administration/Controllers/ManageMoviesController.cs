@@ -24,9 +24,11 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             this.movieService = movie;
         }
 
-        public IActionResult Movies()
+        public IActionResult Movies(MoviesIndexViewModel model)
         {
-            return View();
+            model.Movies = this.movieService.ListAllMovies(1, 10);
+
+            return View(model);
         }
 
         public IActionResult AddMovie()
