@@ -18,6 +18,11 @@ namespace OnlineMovieStore.Web.Controllers
             this.moviesService = moviesService ?? throw new ArgumentNullException(nameof(moviesService));
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Details(string title)
         {
             var movie = this.moviesService.ListMoviesByTitle(title);
