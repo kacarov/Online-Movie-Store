@@ -57,41 +57,40 @@
 cursor: pointer;
 }*/
 
-/*
-    -----------------------------------------
-    Bank Form
-    -----------------------------------------
-*/
-/*.row {
-    display: -ms-flexbox;*/ /* IE10
-    display: flex;
-    -ms-flex-wrap: wrap;  IE10
-    flex-wrap: wrap;
+-----------------------------------------
+Bank Form
+-----------------------------------------
+
+.bank row {
+    display: -ms-flexbox;
+    IE10 display: flex;
+    -ms-flex-wrap: wrap;
+    IE10 flex-wrap: wrap;
     margin: 0 -16px;
 }
 
-.col-25 {
-    -ms-flex: 25%;  IE10
-    flex: 25%;
+.bank col-25 {
+    -ms-flex: 25%;
+    IE10 flex: 25%;
 }
 
-.col-50 {
-    -ms-flex: 50%;  IE10
-    flex: 50%;
+.bank col-50 {
+    -ms-flex: 50%;
+    IE10 flex: 50%;
 }
 
-.col-75 {
-    -ms-flex: 75%;  IE10
-    flex: 75%;
+.bank col-75 {
+    -ms-flex: 75%;
+    IE10 flex: 75%;
 }
 
-.col-25,
-.col-50,
-.col-75 {
+.bank col-25,
+.bank col-50,
+.bank col-75 {
     padding: 0 16px;
 }
 
-input[type=text] {
+.bank input[type=text] {
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
@@ -99,18 +98,18 @@ input[type=text] {
     border-radius: 3px;
 }
 
-label {
+.bank label {
     margin-bottom: 10px;
     display: block;
 }
 
-.icon-container {
+.bank icon-container {
     margin-bottom: 20px;
     padding: 7px 0;
     font-size: 24px;
 }
 
-.btn {
+.bank btn {
     background-color: #D9D9D9;
     color: white;
     padding: 12px;
@@ -122,24 +121,24 @@ label {
     font-size: 17px;
 }
 
-    .btn:hover {
+    .bank btn:hover {
         background-color: #45a049;
     }
 
-a {
+.bank a {
     color: #2196F3;
 }
 
-hr {
+.bank hr {
     border: 1px solid lightgrey;
 }
 
-span.price {
+.bank span.price {
     float: right;
     color: grey;
 }
 
- Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top)
+/*Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top)
 @media (max-width: 800px) {
     .row {
         flex-direction: column-reverse;
@@ -148,21 +147,21 @@ span.price {
     .col-25 {
         margin-bottom: 20px;
     }
-}
+}*/
 
 /*
     ----------------------------------------
     Flip Card
     ------------------------------------------
 
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect
 .flip-card {
     background-color: transparent;
     width: 240px;
     height: 360px;
     border: 1px solid #f1f1f1;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
-    margin-bottom: 50px;
+margin-bottom: 50px;
 }
 
 /* This container is needed to position the front and back side */
