@@ -19,26 +19,23 @@ namespace OnlineMovieStore.Web.Controllers
             this.moviesService = moviesService ?? throw new ArgumentNullException(nameof(moviesService));
         }
 
-        public IActionResult Index(AllMoviesViewModel model)
+        public IActionResult Index(MovieSearchViewModel model)
         {
-            IEnumerable<Movie> movies;
-            AllMoviesViewModel newModel;
-            if (model.SearchText == "")
+
+            if (model.SearchText == null)
             {
-                movies = this.moviesService.ListMovies(model.Page-1, null);
-                newModel = new AllMoviesViewModel(movies);
+                model.Movies = this.moviesService.ListAllMovies(model.Page, 1);
+              //  model.Movies = this.moviesService.ListMovies(model.Page - 1, null);
                 model.TotalPages = (int)Math.Ceiling(this.moviesService.Total() / (double)1);
             }
             else
             {
-                movies = this.moviesService.ListMovies(model.Page-1, model.SearchText);
-                newModel = new AllMoviesViewModel(movies);
+                model.Movies = this.moviesService.ListByContainingText(model.SearchText,model.Page, 1);
+                // model.Movies = this.moviesService.ListMovies(model.Page - 1, model.SearchText);
                 model.TotalPages = (int)Math.Ceiling(this.moviesService.TotalContainingText(model.SearchText) / (double)1);
             }
 
-      
-            
-            return View(newModel);
+            return View(model);
         }
 
         public IActionResult Details(string title)
