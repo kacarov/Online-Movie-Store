@@ -196,7 +196,7 @@ span.price {
 
 /* Style the back side */
 .flip-card-back {
-    background-color: dodgerblue;
-    color: white;
+    background-color: #F5F5F5;
+    color: black;
     transform: rotateY(180deg);
 }

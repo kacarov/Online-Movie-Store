@@ -17,12 +17,28 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="http://barkerhost.com/wp-content/uploads/sites/4/2016/11/zSgL998DXaljsCmwQuwDM8Ak4rV-0.jpg" alt="Avatar" style="width:240px;height:360px;">
+                            <img src="@movie.Image" alt="Avatar" style="width:240px;height:360px;">
                         </div>
                         <div class="flip-card-back">
-                            <h1>@movie.Title</h1>
-                            <p>@movie.Price</p>
-                            <p>.......</p>
+                            <h3>@movie.Title</h3>
+                            <p><strong>Genre</strong></p>
+                            @foreach (var genre in movie.Genre)
+                            {
+                                var genreName = genre.Genre.Name;
+                                if (string.IsNullOrWhiteSpace(genreName))
+                                {
+                                    <p>Unknown</p>
+                                }
+                                else
+                                {
+                                    <p>@genre.Genre.Name</p>
+                                }
+
+                            }
+                            <p><strong>Year</strong></p>
+                            <p>@movie.Year</p>
+                            <p><strong>Film Star</strong></p>
+                            <p>@movie.ActorName</p>
                         </div>
                     </div>
                 </div>
