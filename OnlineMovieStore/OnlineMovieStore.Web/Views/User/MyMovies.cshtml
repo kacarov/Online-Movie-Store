@@ -4,6 +4,11 @@
     ViewData["Title"] = "My Movies";
 }
 
+<div class="breadcrumbs">
+    <a href="/Home/Index">Home</a>
+    <span>My Movies</span>
+</div>
+
 <h1 class="text-center">@ViewData["Title"]</h1>
 <div class="row">
     @{ foreach (var movie in Model.content)

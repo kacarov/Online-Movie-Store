@@ -2,7 +2,13 @@
 @model OnlineMovieStore.Web.Areas.Identity.Pages.Account.Manage.IndexModel
 
 @Html.Partial("_StatusMessage", Model.StatusMessage)
-<div id="exTab2" class="container">
+
+<div class="breadcrumbs">
+    <a href="/Home/Index">Home</a>
+    <span>Help Center</span>
+</div>
+<div id="exTab2" class="container col-md-8">
+
     <ul class="nav nav-tabs">
         <li class="active">
             <a href="#ordersDetails" data-toggle="tab">Orders Details</a>
