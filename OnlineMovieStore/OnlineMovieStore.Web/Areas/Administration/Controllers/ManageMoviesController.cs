@@ -74,7 +74,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
                 }
             }
 
-            this.movieService.AddMovie(vm.ImageURL, vm.Title, vm.Year, genres, int.Parse(vm.ActorId), vm.Price);
+            this.movieService.AddMovie(vm.ImageURL, vm.Title, vm.Year, genres, int.Parse(vm.ActorId), vm.Price, vm.Description, vm.TrailerURL);
 
             return RedirectToAction("Movies", "ManageMovies");
         }
