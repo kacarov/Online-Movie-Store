@@ -21,7 +21,7 @@ namespace OnlineMovieStore.Web.Controllers
         public IActionResult Index()
         {
             var movies = this.moviesService
-                .ListAllMovies()
+                .ListMovies()
                 .Take(10);
 
             return View(new AllMoviesViewModel(movies));
