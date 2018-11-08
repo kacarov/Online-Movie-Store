@@ -27,5 +27,11 @@ namespace OnlineMovieStore.Services
                .Include(m => m.Actor)
                .ToList();
         }
+
+        //TODO: Validations
+        public ApplicationUser GetUser(string id)
+        {
+            return this.context.Users.Find(id);
+        }
     }
 }

@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Web.Areas.Administration.Models;
 using OnlineMovieStore.Web.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineMovieStore.Web.Areas.Administration.Controllers
-{ 
+{
     [Area("Administration")]
     public class ManageMoviesController : Controller
     {
-        private const int pageSize = 1;
+        private const int pageSize = 20;
         private ApplicationDbContext context;
         private IMoviesService movieService;
 

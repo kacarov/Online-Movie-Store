@@ -6,5 +6,7 @@ namespace OnlineMovieStore.Services.Contracts
     public interface IUsersService
     {
         IEnumerable<Movie> Orders(string id);
+
+        ApplicationUser GetUser(string id);
     }
 }

@@ -38,5 +38,12 @@ namespace OnlineMovieStore.Web.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult UserDeposit(string id)
+        {
+            return PartialView("_Deposit", new UserDepositViewModel(userService.GetUser(id)));
+        }
     }
 }
