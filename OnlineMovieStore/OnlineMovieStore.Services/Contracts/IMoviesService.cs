@@ -12,6 +12,8 @@ namespace OnlineMovieStore.Services.Contracts
 
         IEnumerable<Movie> ListMovies();
 
+        IEnumerable<Movie> ListMoviesByHigherPrice(int count);
+
         IEnumerable<Movie> ListByContainingText(string searchText, int page = 1, int pageSize = 10);
 
         IEnumerable<Movie> ListMoviesByActor(string firstName, string lastName);
