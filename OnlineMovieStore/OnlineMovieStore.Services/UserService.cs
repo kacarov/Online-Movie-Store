@@ -41,5 +41,15 @@ namespace OnlineMovieStore.Services
                .Select(m => m.Movie)
                .ToList();
         }
+
+        public ApplicationUser AddToVallet(double amount, string userId)
+        {
+            var user = this.context.Users.Find(userId);
+            user.Balance += amount;
+
+            this.context.SaveChanges();
+
+            return user;
+        }
     }
 }

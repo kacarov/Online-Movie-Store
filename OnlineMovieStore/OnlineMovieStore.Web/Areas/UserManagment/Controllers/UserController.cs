@@ -59,6 +59,16 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         }
 
         [Route("[action]")]
+        [HttpPost]
+        public IActionResult Deposit(double value)
+        {
+            var user = this.userService.AddToVallet(value, this.userManager.GetUserId(User));
+            var userModel = new UserDepositViewModel(user);
+
+            return View(userModel);
+        }
+
+        [Route("[action]")]
         [HttpGet]
         public IActionResult AccountSettings()
         {
@@ -83,13 +93,6 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         public IActionResult Help()
         {
             return View();
-        }
-
-        [Route("[action]/{id}")]
-        [HttpPost]
-        public IActionResult Deposit(object value)
-        {
-            return Ok(value);
         }
     }
 }

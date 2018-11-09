@@ -8,7 +8,8 @@
 
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <div class="dropdown">
-            <button class="dropbtn">@UserManager.GetUserName(User) </button>
+
+            <button class="dropbtn " disabled>@UserManager.GetUserName(User) </button>
             <ul class="dropdown-content  list-group">
                 <li class="list-group-item"><a href="/User/User/MyMovies/@UserManager.GetUserId(User)">MyMovies</a></li>
                 <li class="list-group-item"> <a href="/User/User/Index/">Account</a></li>
@@ -24,7 +25,7 @@
                 @{
                     var a = UserManager.GetUserAsync(User);
                 }
-                <a href="/Identity/Account/Manage">40000</a>
+                <a href="/User/User/Deposit/@UserManager.GetUserId(User)">???</a>
             </button>
         </div>
     </form>
