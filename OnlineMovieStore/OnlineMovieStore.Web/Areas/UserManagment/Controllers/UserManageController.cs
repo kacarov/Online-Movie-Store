@@ -9,15 +9,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace OnlineMovieStore.Web.Areas.UserManagment.Models
+namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
 {
-    public partial class UserIndexViewModel : PageModel
+    [Area("UserManagment")]
+    [Route("User/[controller]")]
+    public partial class UserManageController : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public UserIndexViewModel(
+        public UserManageController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender)
@@ -61,6 +63,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
             public IEnumerable<Order> Orders { get; set; }
         }
 
+        [Route("[action]")]
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);

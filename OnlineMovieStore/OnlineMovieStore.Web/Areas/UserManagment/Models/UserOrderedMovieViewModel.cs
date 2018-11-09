@@ -2,15 +2,16 @@
 
 namespace OnlineMovieStore.Web.Areas.UserManagment.Models
 {
-    public class OrderViewModel
+    public class UserOrderedMovieViewModel
     {
-        public OrderViewModel(Movie movie)
+        public UserOrderedMovieViewModel(Movie movie)
         {
             this.Name = movie.Title;
             this.Price = movie.Price;
         }
 
         public string Name { get; set; }
+
         public double Price { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
     [Route("User/[controller]")]
     public class UserController : Controller
     {
-        private IUsersService userService;
+        private readonly IUsersService userService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public UserController(IUsersService userService, UserManager<ApplicationUser> userManager)
@@ -22,10 +22,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         [Route("[action]")]
         public IActionResult Index()
         {
-            var userOrders = this.userService.OrdersDetails(this.userManager.GetUserId(User));
-            var viewModel = new UserOrdersViewModel(userOrders);
-
-            return View(viewModel);
+            return View();
         }
 
         [Route("[action]/{id}")]
@@ -37,8 +34,44 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
             return this.View(viewModel);
         }
 
+        [Route("[action]")]
+        public IActionResult OrdersDetails()
+        {
+            var userOrders = this.userService.OrdersDetails(this.userManager.GetUserId(User));
+
+            var viewModel = new UserOrdersViewModel(userOrders);
+
+            return View(viewModel);
+        }
+
+        //[Authorize]
+        // [ValidateAntiForgeryToken]
+        // [HttpPost]
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public IActionResult Deposit(string id)
+        {
+            var user = this.userService.GetUser(id);
+
+            var userModel = new UserDepositViewModel(user);
+
+            return View(userModel);
+        }
+
+        [Route("[action]")]
+        [HttpGet]
+        public IActionResult AccountSettings()
+        {
+            var user = this.userService.GetUser(this.userManager.GetUserId(User));
+
+            var userModel = new UserViewModel(user);
+
+            return View(userModel);
+        }
+
         // [Authorize]
         // [ValidateAntiForgeryToken]
+        [Route("[action]")]
         public IActionResult RequestMovie()
         {
             return View();
@@ -46,17 +79,17 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
 
         // [Authorize]
         //  [ValidateAntiForgeryToken]
+        [Route("[action]")]
         public IActionResult Help()
         {
             return View();
         }
 
-        // [Authorize]
-        // [ValidateAntiForgeryToken]
-        // [HttpPost]
-        public IActionResult UserDeposit(string id)
+        [Route("[action]/{id}")]
+        [HttpPost]
+        public IActionResult Deposit(object value)
         {
-            return PartialView("_Deposit", new UserDepositViewModel(userService.GetUser(id)));
+            return Ok(value);
         }
     }
 }

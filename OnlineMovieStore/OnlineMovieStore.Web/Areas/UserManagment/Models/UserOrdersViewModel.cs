@@ -6,11 +6,11 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
 {
     public class UserOrdersViewModel
     {
-        public IEnumerable<OrderViewModel> Orders { get; set; }
+        public IEnumerable<UserOrderedMovieViewModel> Orders { get; set; }
 
         public UserOrdersViewModel(IEnumerable<Movie> movies)
         {
-            this.Orders = movies.Select(m => new OrderViewModel(m));
+            this.Orders = movies.Select(m => new UserOrderedMovieViewModel(m));
         }
     }
 }

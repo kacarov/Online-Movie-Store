@@ -1,95 +1,19 @@
-﻿@using OnlineMovieStore.Web.Models
+﻿@using Microsoft.AspNetCore.Identity
 
-@model OnlineMovieStore.Web.Areas.UserManagment.Models.UserOrdersViewModel
-@*@Html.Partial("_StatusMessage", Model.StatusMessage)*@
+@inject UserManager<ApplicationUser> UserManager
 
 <div class="breadcrumbs">
     <a href="/Home/Index">Home</a>
-    <span>Help Center</span>
+    <span>Account</span>
 </div>
-<div id="exTab2" class="container col-md-8">
-
-    <ul class="nav nav-tabs">
-        <li class="active">
-            <a href="#ordersDetails" data-toggle="tab">Orders Details</a>
-        </li>
-        <li>
-            <a href="#financeSettings" data-toggle="tab">Deposits</a>
-        </li>
-        <li>
-            <a href="#accountSettings" data-toggle="tab">Account Settings</a>
-        </li>
-    </ul>
-
-    <div class="tab-content ">
-        <div class="tab-pane active" id="ordersDetails">
-            @await Html.PartialAsync("Shered/_OrderDetails.cshtml", Model)
-        </div>
-        <div class="tab-pane" id="financeSettings">
-            @*@await Html.PartialAsync("Shered/_Deposit.cshtml")*@
-            <div class="container">
-
-                <div class="col-md-4">
-                    <h3>Current</h3>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            @*<p>Current Account State: @Model.Balance</p>*@
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <h3>Add More</h3>
-                    <form action="post">
-                        <div class="form-group">
-                            <label for="depositAmount">Amount</label>
-                            <input class="form-control" id="focusedInput" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword"></label>
-                            @*<button asp-action="UserDeposit" asp-controller="UserController" asp-route="@UserManager.GetUserId(User)" type="submit">Deposit</button>*@
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane bank" id="accountSettings">
-            @*<div class="col-md-5 bank">
-                    <form id="profile-form bank" method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group bank">
-                            <label asp-for="Username"></label>
-                            <input asp-for="Username" class="form-control bank" disabled />
-                        </div>
-                        <div class="form-group bank">
-                            <label asp-for="Input.Email"></label>
-                            @if (Model.IsEmailConfirmed)
-                            {
-                                <div class="input-group bank">
-                                    <input asp-for="Input.Email" class="form-control bank" />
-                                    <span class="input-group-addon bank" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
-                                </div>
-                            }
-                            else
-                            {
-                                <input asp-for="Input.Email" class="form-control bank" />
-                                <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                            }
-                            <span asp-validation-for="Input.Email" class="text-danger bank"></span>
-                        </div>
-                        <div class="form-group bank">
-                            <label asp-for="Input.PhoneNumber"></label>
-                            <input asp-for="Input.PhoneNumber" class="form-control bank" />
-                            <span asp-validation-for="Input.PhoneNumber" class="text-danger bank"></span>
-                        </div>
-                        <button type="submit" class="btn btn-default bank">Save</button>
-                    </form>
-                </div>*@
-            /**/
-        </div>
+<div class=" row">
+    <div class="col-md-4">
+        <a href="/User/User/OrdersDetails/" title="See your ordered movies"><img src="~/images/order.svg" style="width:300px;height:300px;" /></a>
+    </div>
+    <div class="col-md-4">
+        <a href="/User/User/Deposit/@UserManager.GetUserId(User)" title="Deposit to your Account"> <img src="~/images/deposit.svg" style="width:300px;height:300px;" /></a>
+    </div>
+    <div class="col-md-4">
+        <a href="/User/User/AccountSettings/"> <img src="~/images/account.svg" style="width:300px;height:300px;" /></a>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

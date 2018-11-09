@@ -38,7 +38,8 @@ namespace OnlineMovieStore.Services
         {
             return this.context.Orders
                .Where(u => u.UserId == id)
-               .Select(m => m.Movie).ToList();
+               .Select(m => m.Movie)
+               .ToList();
         }
     }
 }

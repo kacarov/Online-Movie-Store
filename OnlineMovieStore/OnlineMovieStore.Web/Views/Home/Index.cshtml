@@ -9,16 +9,16 @@
                 <ul class="slides">
                     @{var movies = Model.Movies.ToList();}
 
-                    @for(int i = 0; i < 3; i++)
+                    @for (int i = 0; i < 3; i++)
                     {
                         <li>
                             <div class="item">
-                                <a asp-controller="Movies" asp-action="Details" asp-route-title="@movies[i].Title"><img src="@movies[i].Image" alt="Visual Studio" style="max-height: 500px" ; class="img-responsive" /></a>
+                                <a asp-controller="Movies" asp-action="Details" asp-route-title="@movies[i].Title"><img src="@movies[i].Image" alt="Visual Studio" style="max-height: 500px;overflow: hidden;" ; class="img-responsive" /></a>
                                 <div class="carousel-caption" role="option">
 
                                     <!-- <a class="btn btn-default" asp-controller="Movies" asp-action="Details" asp-route-title="@movies[i].Title">
-         Movie Details
-     </a>-->
+                                        Movie Details
+                                    </a>-->
                                 </div>
                             </div>
                         </li>
@@ -61,7 +61,6 @@
         <div class="col-sm-6 col-md-3">
             <div class="latest-movie">
                 <a asp-controller="Movies" asp-action="Details" asp-route-title="@movies[8].Title"><img src="@movies[8].Image" style="height:350px" alt="Movie 9"></a>
-
             </div>
         </div>
     </div> <!-- .row -->
