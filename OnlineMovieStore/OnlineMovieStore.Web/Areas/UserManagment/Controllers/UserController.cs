@@ -22,11 +22,13 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         [Route("[action]")]
         public IActionResult Index()
         {
-            return View();
+            var user = this.userService.GetUser(this.userManager.GetUserId(User));
+            var userViewModel = new UserViewModel(user);
+
+            return View(userViewModel);
         }
 
         [Route("[action]/{id}")]
-
         public IActionResult MyMovies(string id)
         {
             var content = this.userService.Orders(id);
