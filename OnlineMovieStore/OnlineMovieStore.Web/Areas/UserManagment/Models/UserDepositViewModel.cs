@@ -1,6 +1,6 @@
 ﻿using OnlineMovieStore.Models.Models;
 
-namespace OnlineMovieStore.Web.Models
+namespace OnlineMovieStore.Web.Areas.UserManagment.Models
 {
     public class UserDepositViewModel
     {
