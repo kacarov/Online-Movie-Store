@@ -2,83 +2,85 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-        <div class="page">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="slider">
-                        <ul class="slides">
-                            @foreach (var movie in Model.Movies)
-                            {
-                            <li>
-                                <div data-toggle="modal" data-target="#myModal" class="item">
-                                    <img src="@movie.Image" alt="Visual Studio" style="max-height: 500px" ; class="img-responsive" />
-                                    <div class="carousel-caption" role="option">
+<div class="page">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="slider">
+                <ul class="slides">
+                    @{var movies = Model.Movies.ToList();}
 
-                                        <a class="btn btn-default" asp-controller="Movies" asp-action="Details" asp-route-title="@movie.Title">
-                                            Movie Details
-                                        </a>
+                    @for(int i = 0; i < 2; i++)
+                    {
+                        <li>
+                            <div data-toggle="modal" data-target="#myModal" class="item">
+                                <img src="@movies[i].Image" alt="Visual Studio" style="max-height: 500px" ; class="img-responsive" />
+                                <div class="carousel-caption" role="option">
+
+                                    <a class="btn btn-default" asp-controller="Movies" asp-action="Details" asp-route-title="@movies[i].Title">
+                                        Movie Details
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <iframe width="560" height="315" src="@movies[i].TrailerUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                                     </div>
                                 </div>
-                            </li>
-               
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <iframe width="560" height="315" src="@movie.TrailerUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->                    
-                            }
-                            <li><a href="#"><img src="~/dummy/DieHard.jpg" alt="Slide 1"></a></li>
-                            <li><a href="#"><img src="~/dummy/slide-2.jpg" alt="Slide 2"></a></li>
-                            <li><a href="#"><img src="~/dummy/slide-3.jpg" alt="Slide 3"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-12">
-                            <div class="latest-movie">
-                                <a href="#"><img src="~/dummy/thumb-1.jpg" alt="Movie 1"></a>
+                                <!-- /.modal-content -->
                             </div>
+                            <!-- /.modal-dialog -->
                         </div>
-                        <div class="col-sm-6 col-md-12">
-                            <div class="latest-movie">
-                                <a href="#"><img src="~/dummy/thumb-2.jpg" alt="Movie 2"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- .row -->
+                        <!-- /.modal -->
+                    }
+                    <li><a href="#"><img src="~/dummy/DieHard.jpg" alt="Slide 1"></a></li>
+                    <li><a href="#"><img src="~/dummy/slide-2.jpg" alt="Slide 2"></a></li>
+                    <li><a href="#"><img src="~/dummy/slide-3.jpg" alt="Slide 3"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="row">
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-12">
                     <div class="latest-movie">
-                        <a href="#"><img src="~/dummy/thumb-3.jpg" alt="Movie 3"></a>
+                        <a href="#"><img src="@movies[2].Image" style="height:235px" alt="Movie 1"></a>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-12">
                     <div class="latest-movie">
-                        <a href="#"><img src="~/dummy/thumb-4.jpg" alt="Movie 4"></a>
+                        <a href="#"><img src="@movies[3].Image" style="height:235px" alt="Movie 2"></a>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="latest-movie">
-                        <a href="#"><img src="~/dummy/thumb-5.jpg" alt="Movie 5"></a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="latest-movie">
-                        <a href="#"><img src="~/dummy/thumb-6.jpg" alt="Movie 6"></a>
-                    </div>
-                </div>
-            </div> <!-- .row -->
+            </div>
+        </div>
+    </div> <!-- .row -->
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="latest-movie">
+                <a href="#"><img src="~/dummy/Spider-Man.jpg" alt="Movie 3"></a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="latest-movie">
+                <a href="#"><img src="@movies[3].Image" style="height:232px" alt="Movie 4"></a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="latest-movie">
+                <a href="#"><img src="~/dummy/thumb-5.jpg" alt="Movie 5"></a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="latest-movie">
+                <a href="#"><img src="~/dummy/thumb-6.jpg" alt="Movie 6"></a>
+            </div>
+        </div>
+    </div> <!-- .row -->
 
     <div class="row">
         <div class="col-md-4">
