@@ -1,7 +1,6 @@
-﻿@page
-@using OnlineMovieStore.Web.Models
+﻿@using OnlineMovieStore.Web.Models
 
-@model OnlineMovieStore.Web.Areas.UserManagment.Models.UserMoviesViewModel
+@model OnlineMovieStore.Web.Areas.UserManagment.Models.UserOrdersViewModel
 @*@Html.Partial("_StatusMessage", Model.StatusMessage)*@
 
 <div class="breadcrumbs">
@@ -24,7 +23,7 @@
 
     <div class="tab-content ">
         <div class="tab-pane active" id="ordersDetails">
-            @*@await Html.PartialAsync("Shered/_OrderDetails.cshtml", Model.Balance)*@
+            @await Html.PartialAsync("Shered/_OrderDetails.cshtml", Model)
         </div>
         <div class="tab-pane" id="financeSettings">
             @*@await Html.PartialAsync("Shered/_Deposit.cshtml")*@

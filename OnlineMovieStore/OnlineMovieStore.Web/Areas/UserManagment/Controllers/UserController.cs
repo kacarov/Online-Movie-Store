@@ -22,8 +22,8 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         [Route("[action]")]
         public IActionResult Index()
         {
-            var userOrders = this.userService.Orders(this.userManager.GetUserId(User));
-            var viewModel = new UserMoviesViewModel(userOrders);
+            var userOrders = this.userService.OrdersDetails(this.userManager.GetUserId(User));
+            var viewModel = new UserOrdersViewModel(userOrders);
 
             return View(viewModel);
         }

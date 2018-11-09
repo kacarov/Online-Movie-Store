@@ -8,5 +8,7 @@ namespace OnlineMovieStore.Services.Contracts
         IEnumerable<Movie> Orders(string id);
 
         ApplicationUser GetUser(string id);
+
+        IEnumerable<Movie> OrdersDetails(string id);
     }
 }
