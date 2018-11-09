@@ -33,5 +33,16 @@ namespace OnlineMovieStore.Services
         {
             return this.context.Users.Find(id);
         }
+
+        //public ApplicationUser OrdersDetails(string id)
+        //{
+        //    return this.context.Orders
+        //       .Where(u => u.UserId == id)
+        //       .Select(m => m.Order);
+        //       .Include(m => m.Genres)
+        //        .ThenInclude(mg => mg.Genre)
+        //       .Include(m => m.Actor)
+        //       .ToList();
+        //}
     }
 }
