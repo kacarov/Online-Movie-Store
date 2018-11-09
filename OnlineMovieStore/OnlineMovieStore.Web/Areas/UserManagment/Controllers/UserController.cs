@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
-using OnlineMovieStore.Web.Models;
+using OnlineMovieStore.Web.Areas.UserManagment.Models;
 
-namespace OnlineMovieStore.Web.Controllers
+namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
 {
+    [Area("UserManagment")]
+    [Route("User/[controller]")]
     public class UserController : Controller
     {
         private IUsersService userService;
@@ -18,7 +19,14 @@ namespace OnlineMovieStore.Web.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
+        [Route("[action]")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("[action]/{id}")]
+
         public IActionResult MyMovies(string id)
         {
             var content = this.userService.Orders(id);
@@ -27,20 +35,23 @@ namespace OnlineMovieStore.Web.Controllers
             return this.View(viewModel);
         }
 
-        [Authorize]
+        // [Authorize]
+        // [ValidateAntiForgeryToken]
         public IActionResult RequestMovie()
         {
             return View();
         }
 
-        [Authorize]
+        // [Authorize]
+        //  [ValidateAntiForgeryToken]
         public IActionResult Help()
         {
             return View();
         }
 
-        [Authorize]
-        [HttpPost]
+        // [Authorize]
+        // [ValidateAntiForgeryToken]
+        // [HttpPost]
         public IActionResult UserDeposit(string id)
         {
             return PartialView("_Deposit", new UserDepositViewModel(userService.GetUser(id)));
