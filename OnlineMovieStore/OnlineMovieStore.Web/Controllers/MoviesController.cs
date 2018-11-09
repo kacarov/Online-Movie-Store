@@ -40,10 +40,11 @@ namespace OnlineMovieStore.Web.Controllers
 
         public IActionResult Details(string title)
         {
+           // ModelState.Clear();
+
             var movie = this.moviesService.ListMoviesByTitle(title);
 
             return View(new MoviesViewModel(movie));
         }
-
     }
 }

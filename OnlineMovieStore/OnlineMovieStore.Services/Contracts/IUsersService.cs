@@ -12,5 +12,7 @@ namespace OnlineMovieStore.Services.Contracts
         IEnumerable<Movie> OrdersDetails(string id);
 
         ApplicationUser AddToVallet(double amount, string userId);
+
+        double GetBalance(string id);
     }
 }

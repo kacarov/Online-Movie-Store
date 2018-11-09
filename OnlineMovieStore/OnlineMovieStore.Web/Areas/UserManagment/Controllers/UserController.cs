@@ -60,9 +60,9 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public IActionResult Deposit(double value)
+        public IActionResult Deposit(UserDepositViewModel model)
         {
-            var user = this.userService.AddToVallet(value, this.userManager.GetUserId(User));
+            var user = this.userService.AddToVallet(model.DepositSum, this.userManager.GetUserId(User));
             var userModel = new UserDepositViewModel(user);
 
             return View(userModel);

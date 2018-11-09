@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Web.Models;
 
@@ -23,7 +25,9 @@ namespace OnlineMovieStore.Web.Controllers
             var movies = this.moviesService
                 .ListMoviesByHigherPrice(9);
 
-            return View(new AllMoviesViewModel(movies));
+            AllMoviesViewModel model = new AllMoviesViewModel(movies);
+
+            return View(model);
         }
 
         public IActionResult About()

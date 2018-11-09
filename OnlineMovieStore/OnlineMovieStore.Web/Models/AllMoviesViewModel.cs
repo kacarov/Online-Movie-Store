@@ -14,7 +14,7 @@ namespace OnlineMovieStore.Web.Models
         }
         public AllMoviesViewModel(IEnumerable<Movie> movies)
         {
-            Movies = movies.Select(m => new MoviesViewModel(m));
+            this.Movies = movies.Select(m => new MoviesViewModel(m));
         }
 
         public IEnumerable<MoviesViewModel> Movies { get; set; }

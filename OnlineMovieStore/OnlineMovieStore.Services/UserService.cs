@@ -51,5 +51,12 @@ namespace OnlineMovieStore.Services
 
             return user;
         }
+
+        public double GetBalance(string id)
+        {
+            var user = this.context.Users.Find(id);
+
+            return user.Balance;
+        }
     }
 }

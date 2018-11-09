@@ -4,6 +4,11 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
 {
     public class UserDepositViewModel
     {
+        public UserDepositViewModel()
+        {
+
+        }
+
         public UserDepositViewModel(ApplicationUser user)
         {
             this.Balance = user.Balance;
@@ -12,5 +17,9 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
 
         public double Balance { get; set; }
         public string UserName { get; set; }
+
+        public string SuccesfullDeposit { get; set; }
+
+        public double DepositSum { get; set; }
     }
 }
