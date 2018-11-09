@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnlineMovieStore.Models.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -28,7 +29,11 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
 
         public string Username { get; set; }
 
+        public double Balance { get; set; }
+
         public bool IsEmailConfirmed { get; set; }
+
+        public IEnumerable<Order> Orders { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -49,6 +54,11 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required]
+            public double Balance { get; set; }
+
+            public IEnumerable<Order> Orders { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -69,7 +79,9 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Models
             {
                 UserName = userName,
                 Email = email,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Balance = user.Balance,
+                Orders = user.Orders
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
