@@ -3,6 +3,7 @@ using OnlineMovieStore.Services.Exceptions;
 using OnlineMovieStore.Services.Services.Contracts;
 using OnlineMovieStore.Web.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineMovieStore.Services.Services
@@ -63,6 +64,11 @@ namespace OnlineMovieStore.Services.Services
             this.context.SaveChanges();
 
             return genre;
+        }
+
+        public IEnumerable<Genre> GetAll()
+        {
+            return this.context.Genres.ToList();
         }
     }
 }

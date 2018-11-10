@@ -10,5 +10,6 @@ namespace OnlineMovieStore.Services.Services.Contracts
         Actor AddActor(string firstName, string lastName, int age);
         Actor UpdateActorAge(string firstName, string lastName, int age);
         Actor DeleteActor(string firstName, string lastName);
+        IEnumerable<Actor> GetAll();
     }
 }

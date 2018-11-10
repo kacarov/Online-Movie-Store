@@ -31,6 +31,17 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult AddActor(AddActorViewModel vM)
         {
+            var actors = this.actorsService.GetAll().ToList();
+
+            foreach (var actor in actors)
+            {
+                if (actor.FirstName == vM.FirstName && actor.LastName == vM.LastName)
+                {
+                    ViewData["ActorExists"] = "An actor with this name already exists!";
+                    return View(vM);
+                }
+            }
+
             this.actorsService.AddActor(vM.FirstName, vM.LastName, vM.Age);
 
             return RedirectToAction("Actors", "ManageActors");
