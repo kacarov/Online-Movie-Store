@@ -1701,3 +1701,7 @@ ul.arrow {
   .site-footer .colophon {
     padding-top: 30px; }
 
+a.disabled {
+    pointer-events: none;
+}
+

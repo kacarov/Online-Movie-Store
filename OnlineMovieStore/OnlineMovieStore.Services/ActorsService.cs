@@ -79,9 +79,40 @@ namespace OnlineMovieStore.Services.Services
             return actor;
         }
 
+        public IEnumerable<Actor> GetActorsPerPage(int page = 1, int pageSize = 10)
+        {
+            return this.context.Actors.OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
         public IEnumerable<Actor> GetAll()
         {
             return this.context.Actors.ToList();
+        }
+
+        public IEnumerable<Actor> ListByContainingText(string searchText, int page, int pageSize)
+        {
+            var all = this.context.Actors.ToList();
+            List<Actor> result = new List<Actor>();
+
+            foreach (var actor in all)
+            {
+                if ($"{actor.FirstName} {actor.LastName}".Contains(searchText, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    result.Add(actor);
+                }
+            }
+
+            return result.OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public int Total()
+        {
+            return this.context.Actors.Count();
+        }
+
+        public int TotalContainingText(string searchText)
+        {
+            return this.context.Actors.Where(a => $"{a.FirstName} {a.LastName}".Contains(searchText)).ToList().Count();
         }
 
         public Actor UpdateActorAge(string firstName, string lastName, int age)

@@ -11,6 +11,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class ManageActorsController : Controller
     {
+        private const int pageSize = 10;
         private IActorsService actorsService;
 
         public ManageActorsController(IActorsService actors)
@@ -18,9 +19,20 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             this.actorsService = actors;
         }
 
-        public IActionResult Actors()
+        public IActionResult Actors(ActorsViewModel model)
         {
-            return View();
+            if (model.SearchText == null)
+            {
+                model.TotalPages = (int)Math.Ceiling(this.actorsService.Total() / (double)pageSize);
+                model.Actors = this.actorsService.GetActorsPerPage(model.Page, pageSize);
+            }
+            else
+            {
+                model.TotalPages = (int)Math.Ceiling(this.actorsService.TotalContainingText(model.SearchText) / (double)pageSize);
+                model.Actors = this.actorsService.ListByContainingText(model.SearchText, model.Page, pageSize);
+            }
+
+            return View(model);
         }
 
         public IActionResult AddActor()
