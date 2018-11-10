@@ -11,6 +11,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class ManageGenresController : Controller
     {
+        private const int pageSize = 10;
         private IGenresService genreService;
 
         public ManageGenresController(IGenresService genre)
@@ -18,9 +19,20 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             this.genreService = genre;
         }
 
-        public IActionResult Genres()
+        public IActionResult Genres(GenresViewModel model)
         {
-            return View();
+            if (model.SearchText == null)
+            {
+                model.TotalPages = (int)Math.Ceiling(this.genreService.Total() / (double)pageSize);
+                model.Genres = this.genreService.GetGenresPerPage(model.Page, pageSize);
+            }
+            else
+            {
+                model.TotalPages = (int)Math.Ceiling(this.genreService.TotalContainingText(model.SearchText) / (double)pageSize);
+                model.Genres = this.genreService.ListByContainingText(model.SearchText, model.Page, pageSize);
+            }
+
+            return View(model);
         }
 
         public IActionResult AddGenre()

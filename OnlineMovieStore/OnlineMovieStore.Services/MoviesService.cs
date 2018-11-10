@@ -388,7 +388,7 @@ namespace OnlineMovieStore.Services.Services
 
         public int TotalContainingText(string searchText)
         {
-            return this.context.Movies.Where(m => m.Title.Contains(searchText)).ToList().Count();
+            return this.context.Movies.Where(m => m.Title.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).ToList().Count();
         }
     }
 }

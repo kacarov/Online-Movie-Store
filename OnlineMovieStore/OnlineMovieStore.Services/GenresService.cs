@@ -66,9 +66,29 @@ namespace OnlineMovieStore.Services.Services
             return genre;
         }
 
+        public IEnumerable<Genre> GetGenresPerPage(int page = 1, int pageSize = 10)
+        {
+            return this.context.Genres.OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
         public IEnumerable<Genre> GetAll()
         {
             return this.context.Genres.ToList();
+        }
+
+        public int Total()
+        {
+            return this.context.Genres.Count();
+        }
+
+        public int TotalContainingText(string searchText)
+        {
+            return this.context.Genres.Where(a => a.Name.Contains(searchText)).ToList().Count();
+        }
+
+        public IEnumerable<Genre> ListByContainingText(string searchText, int page = 1, int pageSize = 10)
+        {
+            return this.context.Genres.Where(m => m.Name.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }

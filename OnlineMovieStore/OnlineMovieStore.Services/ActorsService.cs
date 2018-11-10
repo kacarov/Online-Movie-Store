@@ -112,7 +112,7 @@ namespace OnlineMovieStore.Services.Services
 
         public int TotalContainingText(string searchText)
         {
-            return this.context.Actors.Where(a => $"{a.FirstName} {a.LastName}".Contains(searchText)).ToList().Count();
+            return this.context.Actors.Where(a => $"{a.FirstName} {a.LastName}".Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).ToList().Count();
         }
 
         public Actor UpdateActorAge(string firstName, string lastName, int age)
