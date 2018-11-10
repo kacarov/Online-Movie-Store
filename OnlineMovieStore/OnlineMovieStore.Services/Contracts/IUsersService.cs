@@ -14,5 +14,7 @@ namespace OnlineMovieStore.Services.Contracts
         ApplicationUser AddToVallet(double amount, string userId);
 
         double GetBalance(string id);
+
+        ApplicationUser UpdateAccountDetails(string UserName, string Email, string PhoneNumber, string userId);
     }
 }

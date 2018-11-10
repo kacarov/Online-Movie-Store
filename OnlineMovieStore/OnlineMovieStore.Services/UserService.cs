@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Web.Data;
@@ -10,10 +11,12 @@ namespace OnlineMovieStore.Services
     public class UserService : IUsersService
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserService(ApplicationDbContext context)
+        public UserService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
 
         //TODO: GET ORDERS OF THE CURRENT USER
@@ -57,6 +60,22 @@ namespace OnlineMovieStore.Services
             var user = this.context.Users.Find(id);
 
             return user.Balance;
+        }
+
+        public ApplicationUser UpdateAccountDetails(string UserName, string Email, string PhoneNumber, string userId)
+        {
+            var user = this.context.Users.Find(userId);
+
+            user.UserName = UserName;
+            user.Email = Email;
+            user.PhoneNumber = PhoneNumber;
+            user.NormalizedUserName = UserName.ToUpper();
+
+            this.context.SaveChanges();
+
+            userManager.UpdateAsync(user);
+
+            return user;
         }
     }
 }

@@ -12,11 +12,15 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
     {
         private readonly IUsersService userService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public UserController(IUsersService userService, UserManager<ApplicationUser> userManager)
+        public UserController(IUsersService userService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.userService = userService;
             this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         [Route("[action]")]
@@ -77,6 +81,21 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
             var userModel = new UserViewModel(user);
 
             return View(userModel);
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public IActionResult AccountSettings(UserViewModel model)
+        {
+            //Update user settings
+            var user = this.userService.UpdateAccountDetails(model.Username, model.Email, model.PhoneNumber, this.userManager.GetUserId(User));
+
+            //Pass model
+            var userModel = new UserViewModel(user);
+
+            this.signInManager.SignOutAsync();
+
+            return RedirectToAction("Logout", "Account", new { area = "Identity" });
         }
 
         // [Authorize]

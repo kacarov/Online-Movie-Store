@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OnlineMovieStore.Models;
 using OnlineMovieStore.Models.Contracts;
 using OnlineMovieStore.Models.Models;
+using System;
+using System.Linq;
 
 namespace OnlineMovieStore.Web.Data
 {
@@ -27,7 +24,10 @@ namespace OnlineMovieStore.Web.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
 
+        public ApplicationDbContext()
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -71,4 +71,3 @@ namespace OnlineMovieStore.Web.Data
         }
     }
 }
-
