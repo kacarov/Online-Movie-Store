@@ -6,6 +6,12 @@
 
 <h1>Details</h1>
 
+@if (Model.isOwned == true)
+{
+    <p>
+        This movie is already in your collection
+    </p>
+}
 
 <div class="text-center">
     <h2>@Model.Title<span>(@Model.Year)</span></h2>
@@ -33,7 +39,14 @@
     </div>
 
     <div>
-        <button type="button" class="btn btn-secondary btn-lg">Buy movie</button>
+        @if (Model.isOwned == false)
+        {
+
+            <form asp-controller="Movies" asp-action="Details" method="post">
+                <button type="submit" class="btn btn-secondary btn-lg">Buy movie</button>
+                <input asp-for="Title" type="hidden" value="@Model.Title">
+            </form>
+        }
     </div>
 
     <!-- Modal -->
