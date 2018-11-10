@@ -16,3 +16,12 @@ $(document).ready(function () {
 $('.flip').hover(function () {
     $(this).find('.card').toggleClass('flipped');
 });
+
+$(document).ready(function () {
+    $('#myModal').on('hidden.bs.modal', function () {
+        var $this = $(this).find('iframe'),
+            tempSrc = $this.attr('src');
+        $this.attr('src', "");
+        $this.attr('src', tempSrc);
+    });
+});
