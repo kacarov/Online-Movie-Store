@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Models.Models;
@@ -22,6 +23,7 @@ namespace OnlineMovieStore.Web.Controllers
             this.usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
         }
 
+        [Authorize]
         public IActionResult Index(MovieSearchViewModel model)
         {
 
@@ -40,6 +42,7 @@ namespace OnlineMovieStore.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Details(string title)
         {
             string userId = this.userManager.GetUserId(User);
