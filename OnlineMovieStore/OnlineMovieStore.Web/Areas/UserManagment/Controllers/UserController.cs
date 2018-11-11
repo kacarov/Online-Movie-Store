@@ -90,6 +90,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         }
 
         [Route("[action]")]
+
         [HttpGet]
         public IActionResult AccountSettings()
         {
