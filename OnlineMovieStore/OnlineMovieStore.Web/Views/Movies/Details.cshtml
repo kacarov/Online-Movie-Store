@@ -4,66 +4,80 @@
 
 @model MoviesViewModel
 
-<h1>Details</h1>
+<h1>Movie Details</h1>
 
-@if (Model.isOwned == true)
+@if (Model.IsOwned == true)
 {
     <p>
         You have purchased this movie :)
     </p>
 }
 
-<div class="text-center">
-    <h2>@Model.Title<span>(@Model.Year)</span></h2>
-    <img data-toggle="modal" data-target="#myModal" src="@Model.Image" class="text-center img-rounded" style="max-height: 500px; max-width: 500px;" alt="...">
-
-    <div>
-        <h4>
-            Genre: @foreach (var genre in Model.Genre)
-            {
-                <span>@genre.Genre.Name </span>
-            }
-        </h4>
-    </div>
-
-    <div>
-        <h4>
-            Price: @Model.Price$
-        </h4>
-    </div>
-
-    <div>
-        <h4>
-            Description: @Model.Description
-        </h4>
-    </div>
-
-    <div>
-        @if (Model.isOwned == false)
-        {
-
-            <form asp-controller="Movies" asp-action="Details" method="post">
-                <button type="submit" class="btn btn-secondary btn-lg">Buy movie</button>
-                <input asp-for="Title" type="hidden" value="@Model.Title">
-            </form>
-        }
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <iframe width="560" height="315" src="@Model.TrailerUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                </div>
-            </div>
-            <!-- /.modal-content -->
+    <div class="well text-center col-lg-4 col-lg-offset-4">
+        <h2>@Model.Title<span>(@Model.Year)</span></h2>
+        <img data-toggle="modal" data-target="#myModal" src="@Model.Image" class="text-center img-rounded" style="max-height: 500px; max-width: 500px;" alt="...">
+        <br />
+        <br />
+        <div>
+            <h4>
+                Genre: @foreach (var genre in Model.Genre)
+                {
+                    <span>@genre.Genre.Name </span>
+                }
+            </h4>
+            <hr />
         </div>
-        <!-- /.modal-dialog -->
+
+        <div>
+            <h4>
+                <span class="">Price:</span> @Model.Price$
+            </h4>
+            <hr />
+        </div>
+
+
+        @if (Model.IsOwned == false)
+        {
+            <div>
+                <h4>
+                    Description: @Model.Description
+                </h4>
+                <hr />
+            </div>
+
+            <div>
+                <form asp-controller="Movies" asp-action="Details" method="post">
+                    <button type="submit" class="btn btn-secondary btn-lg">Buy movie</button>
+                    <input asp-for="Title" type="hidden" value="@Model.Title">
+                </form>
+            </div>
+        }
+
+        else
+        {
+            <div>
+                <h4>
+                    Description: @Model.Description
+                </h4>
+            </div>
+        }
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <iframe width="560" height="315" src="@Model.TrailerUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </div>
-    <!-- /.modal -->
-</div>
 
 
 

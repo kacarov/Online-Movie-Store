@@ -59,7 +59,7 @@ namespace OnlineMovieStore.Web.Controllers
             {
                 if(m.Title == title)
                 {
-                    model.isOwned = true;
+                    model.IsOwned = true;
                 }
             }
 

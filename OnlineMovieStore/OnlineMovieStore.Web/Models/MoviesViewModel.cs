@@ -36,6 +36,6 @@ namespace OnlineMovieStore.Web.Models
         public DateTime? AddedOn { get;set; }
         public string Description { get; private set; }
         public string TrailerUrl { get; private set; }
-        public bool isOwned { get; set; } = false;
+        public bool IsOwned { get; set; } = false;
     }
 }
