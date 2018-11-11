@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Services.Services.Contracts;
 using OnlineMovieStore.Web.Areas.Administration.Models;
@@ -9,6 +10,7 @@ using OnlineMovieStore.Web.Areas.Administration.Models;
 namespace OnlineMovieStore.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
+    [Authorize(Roles = "Admin")]
     public class ManageActorsController : Controller
     {
         private const int pageSize = 10;
@@ -19,6 +21,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             this.actorsService = actors;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Actors(ActorsViewModel model)
         {
             if (model.SearchText == null)
@@ -35,12 +38,14 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult AddActor()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddActor(AddActorViewModel vM)
         {
             var actors = this.actorsService.GetAll().ToList();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Services.Services.Contracts;
@@ -11,6 +12,7 @@ using System.Linq;
 namespace OnlineMovieStore.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
+    [Authorize(Roles = "Admin")]
     public class ManageMoviesController : Controller
     {
         private const int pageSize = 10;
@@ -25,6 +27,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             this.movieService = movie;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Movies(MoviesIndexViewModel model)
         {
             if (model.SearchText == null)
@@ -41,6 +44,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult AddMovie()
         {
             List<Actor> actors = this.actorsService.GetAll().ToList();
@@ -52,6 +56,7 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddMovie(AddMovieViewModel vm)
         {
             if (!this.ModelState.IsValid)

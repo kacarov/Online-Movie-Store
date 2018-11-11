@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Services.Services.Contracts;
 using OnlineMovieStore.Web.Areas.Administration.Models;
 using OnlineMovieStore.Web.Data;
@@ -7,6 +8,7 @@ using System;
 namespace OnlineMovieStore.Web.Areas.Admin.Controllers
 {
     [Area("Administration")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private int pageSize = 10;
@@ -17,6 +19,7 @@ namespace OnlineMovieStore.Web.Areas.Admin.Controllers
             this.ordersService = ordersService;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index(AdminIndexViewModel model)
         {
             if (model.SearchText == null)
