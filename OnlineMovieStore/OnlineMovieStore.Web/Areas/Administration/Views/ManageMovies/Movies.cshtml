@@ -43,9 +43,9 @@
         @foreach (var movie in Model.Movies)
         {
             <tr>
-                <td>@movie.Title</td>
+                <td><a href="/Movies/Details?=@movie.Title">@movie.Title</a></td>
                 <td>@movie.Year</td>
-                <td>@movie.Price</td>
+                <td>$@movie.Price</td>
             </tr>
         }
     </tbody>
