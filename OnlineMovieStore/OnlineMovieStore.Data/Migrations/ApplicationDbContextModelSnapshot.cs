@@ -119,7 +119,7 @@ namespace OnlineMovieStore.Data.Migrations
                     b.ToTable("AspNetUserRoles");
 
                     b.HasData(
-                        new { UserId = "c72ebfa8-9623-4602-9b6e-329ecd722628", RoleId = "1" }
+                        new { UserId = "712f9231-8b95-48fd-8f7f-f7960d24557b", RoleId = "1" }
                     );
                 });
 
@@ -220,7 +220,7 @@ namespace OnlineMovieStore.Data.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "c72ebfa8-9623-4602-9b6e-329ecd722628", AccessFailedCount = 0, Balance = 0.0, ConcurrencyStamp = "423b4b97-a2c1-4431-bec4-b9666a84624a", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMINMAIN", PasswordHash = "AQAAAAEAACcQAAAAEIbhjDqWH4lt52DVQyyEclfkP83jZL5Hk3v0d5p7J68sApnjm/CzBd49Ro8ZL97BXQ==", PhoneNumber = "+111111111", PhoneNumberConfirmed = true, SecurityStamp = "1dea36c8-5b21-4c6d-bd65-21353bcf0861", TwoFactorEnabled = false, UserName = "VksAdmin" }
+                        new { Id = "712f9231-8b95-48fd-8f7f-f7960d24557b", AccessFailedCount = 0, Balance = 0.0, ConcurrencyStamp = "86cb3cb7-8430-49fd-ba25-0f89ea0cd666", Email = "vksn@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "VKS@MAIL.COM", NormalizedUserName = "VKSADMIN", PasswordHash = "AQAAAAEAACcQAAAAEFUzOFf+zqkcHGmfWivQiCxW24o8lAWLm16UsMM59C8m0+mcpEd8fDSD96BvvjrumA==", PhoneNumber = "+55555", PhoneNumberConfirmed = true, SecurityStamp = "b7991a82-e0be-4327-9d28-86ff4a3c1f71", TwoFactorEnabled = false, UserName = "VksAdmin" }
                     );
                 });
 

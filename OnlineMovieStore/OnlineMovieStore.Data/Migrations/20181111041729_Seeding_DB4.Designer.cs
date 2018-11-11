@@ -10,8 +10,8 @@ using OnlineMovieStore.Web.Data;
 namespace OnlineMovieStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181111033810_Seeding_DB")]
-    partial class Seeding_DB
+    [Migration("20181111041729_Seeding_DB4")]
+    partial class Seeding_DB4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,7 +121,7 @@ namespace OnlineMovieStore.Data.Migrations
                     b.ToTable("AspNetUserRoles");
 
                     b.HasData(
-                        new { UserId = "4be9c1d1-cfb3-432f-ab8d-2ee18e2f0eea", RoleId = "1" }
+                        new { UserId = "712f9231-8b95-48fd-8f7f-f7960d24557b", RoleId = "1" }
                     );
                 });
 
@@ -222,7 +222,7 @@ namespace OnlineMovieStore.Data.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "4be9c1d1-cfb3-432f-ab8d-2ee18e2f0eea", AccessFailedCount = 0, Balance = 0.0, ConcurrencyStamp = "6545cbd4-fbf2-4c0a-9681-89e401781ad5", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMINMAIN", PasswordHash = "AQAAAAEAACcQAAAAECk4ynnDQ+/jNKUNEHwL379ldVHSi7WO3lAiZuBDLil9CR9ltQLCRPbUYANUzbsMMA==", PhoneNumber = "+111111111", PhoneNumberConfirmed = true, SecurityStamp = "bc2b4a8f-1d26-4055-9277-b29962ef70b4", TwoFactorEnabled = false, UserName = "adminMain" }
+                        new { Id = "712f9231-8b95-48fd-8f7f-f7960d24557b", AccessFailedCount = 0, Balance = 0.0, ConcurrencyStamp = "86cb3cb7-8430-49fd-ba25-0f89ea0cd666", Email = "vksn@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "VKS@MAIL.COM", NormalizedUserName = "VKSADMIN", PasswordHash = "AQAAAAEAACcQAAAAEFUzOFf+zqkcHGmfWivQiCxW24o8lAWLm16UsMM59C8m0+mcpEd8fDSD96BvvjrumA==", PhoneNumber = "+55555", PhoneNumberConfirmed = true, SecurityStamp = "b7991a82-e0be-4327-9d28-86ff4a3c1f71", TwoFactorEnabled = false, UserName = "VksAdmin" }
                     );
                 });
 
