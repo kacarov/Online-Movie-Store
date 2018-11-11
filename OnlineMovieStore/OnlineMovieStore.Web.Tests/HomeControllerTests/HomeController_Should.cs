@@ -31,7 +31,6 @@ namespace OnlineMovieStore.Web.Tests.HomeControllerTests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
-
         private Mock<IMoviesService> SetupMockService()
         {
             var moviesServiceMock = new Mock<IMoviesService>();
@@ -41,6 +40,5 @@ namespace OnlineMovieStore.Web.Tests.HomeControllerTests
 
             return moviesServiceMock;
         }
-
     }
 }
