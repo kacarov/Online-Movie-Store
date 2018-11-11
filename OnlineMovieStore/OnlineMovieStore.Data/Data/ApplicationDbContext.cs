@@ -52,7 +52,7 @@ namespace OnlineMovieStore.Web.Data
             {
                 Id = Guid.NewGuid().ToString(),
                 Balance = 0,
-                UserName = "adminMain",
+                UserName = "VksAdmin",
                 NormalizedUserName = "adminMain".ToUpper(),
                 Email = "admin@mail.com",
                 NormalizedEmail = "admin@mail.com".ToUpper(),
@@ -62,7 +62,7 @@ namespace OnlineMovieStore.Web.Data
                 SecurityStamp = Guid.NewGuid().ToString("D"),
             };
 
-            var hashePass = new PasswordHasher<ApplicationUser>().HashPassword(adminUser, "magicString");
+            var hashePass = new PasswordHasher<ApplicationUser>().HashPassword(adminUser, "!Password2018");
             adminUser.PasswordHash = hashePass;
 
             modelBuilder.Entity<ApplicationUser>().HasData(adminUser);
