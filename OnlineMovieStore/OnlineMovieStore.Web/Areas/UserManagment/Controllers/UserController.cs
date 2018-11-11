@@ -18,9 +18,9 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
-            this.userService = userService;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            this.userService = userService ?? throw new System.ArgumentNullException(nameof(userService));
+            this.userManager = userManager ?? throw new System.ArgumentNullException(nameof(userManager));
+            this.signInManager = signInManager ?? throw new System.ArgumentNullException(nameof(signInManager));
         }
 
         [Route("[action]")]
@@ -33,6 +33,11 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         public IActionResult MyMovies(string id)
         {
             var content = this.userService.Orders(id);
+            if (content == null)
+            {
+                return NotFound($"Unable to load user with this id.");
+            }
+
             var viewModel = new UserMoviesViewModel(content);
 
             return this.View(viewModel);
@@ -42,6 +47,10 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         public IActionResult OrdersDetails()
         {
             var userOrders = this.userService.OrdersDetails(this.userManager.GetUserId(User));
+            if (userOrders == null)
+            {
+                return NotFound($"Unable to load user order details.");
+            }
 
             var viewModel = new UserOrdersViewModel(userOrders);
 
@@ -56,6 +65,10 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         public IActionResult Deposit(string id)
         {
             var user = this.userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with this id.");
+            }
 
             var userModel = new UserDepositViewModel(user);
 
@@ -67,6 +80,10 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         public IActionResult Deposit(UserDepositViewModel model)
         {
             var user = this.userService.AddToVallet(model.DepositSum, this.userManager.GetUserId(User));
+            if (user == null)
+            {
+                return NotFound($"Unable to load user details.");
+            }
             var userModel = new UserDepositViewModel(user);
 
             return View(userModel);
@@ -77,6 +94,10 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         public IActionResult AccountSettings()
         {
             var user = this.userService.GetUser(this.userManager.GetUserId(User));
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with this id.");
+            }
 
             var userModel = new UserViewModel(user);
 
@@ -87,19 +108,28 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         [HttpPost]
         public IActionResult AccountSettings(UserViewModel model)
         {
-            //Update user settings
-            var user = this.userService.UpdateAccountDetails(model.Username, model.Email, model.PhoneNumber, this.userManager.GetUserId(User));
+            if (this.ModelState.IsValid)
+            {
+                //Update user settings
+                var user = this.userService.UpdateAccountDetails(model.Username, model.Email, model.PhoneNumber, this.userManager.GetUserId(User));
+                if (user == null)
+                {
+                    return NotFound($"Unable to load user account settings.");
+                }
 
-            //Pass model
-            var userModel = new UserViewModel(user);
+                //Pass model
+                var userModel = new UserViewModel(user);
 
-            this.signInManager.SignOutAsync();
+                this.signInManager.SignOutAsync();
 
-            return RedirectToAction("Logout", "Account", new { area = "Identity" });
+                return RedirectToAction("Logout", "Account", new { area = "Identity" });
+            }
+
+            return this.View(model);
         }
 
         // [Authorize]
-        // [ValidateAntiForgeryToken]
+
         [Route("[action]")]
         public IActionResult RequestMovie()
         {
@@ -107,7 +137,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         }
 
         // [Authorize]
-        //  [ValidateAntiForgeryToken]
+
         [Route("[action]")]
         public IActionResult Help()
         {
