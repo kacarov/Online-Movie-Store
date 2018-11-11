@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OnlineMovieStore.Services.Contracts;
+using OnlineMovieStore.Web.Areas.Administration.Models;
 using OnlineMovieStore.Web.Data;
 
 namespace OnlineMovieStore.Web.Areas.Administration.Controllers
@@ -10,16 +12,29 @@ namespace OnlineMovieStore.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class ManageUsersController : Controller
     {
-        private ApplicationDbContext context;
+        private const int pageSize = 10;
+        private IUsersService usersService;
 
-        public ManageUsersController(ApplicationDbContext ctxt)
+        public ManageUsersController(IUsersService users)
         {
-            this.context = ctxt;
+            this.usersService = users;
         }
 
-        public IActionResult Users()
+        public IActionResult Users(UsersViewModel model)
         {
-            return View();
+            if (model.SearchText == null)
+            {
+                model.TotalPages = (int)Math.Ceiling(this.usersService.Total() / (double)pageSize);
+                model.Users = this.usersService.GetAllUsers(model.Page, pageSize);
+            }
+            else
+            {
+                model.TotalPages = (int)Math.Ceiling(this.usersService.TotalContainingText(model.SearchText) / (double)pageSize);
+                model.Users = this.usersService.UsersContainingText(model.SearchText, model.Page, pageSize);
+            }
+
+            return View(model);
         }
+
     }
 }

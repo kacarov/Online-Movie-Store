@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
 using OnlineMovieStore.Web.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,6 +77,26 @@ namespace OnlineMovieStore.Services
             userManager.UpdateAsync(user);
 
             return user;
+        }
+
+        public IEnumerable<ApplicationUser> GetAllUsers(int page = 1, int pageSize = 10)
+        {
+            return this.context.Users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public int Total()
+        {
+            return this.context.Users.Count();
+        }
+
+        public int TotalContainingText(string searchText)
+        {
+            return this.context.Users.Where(u => u.UserName.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).Count();
+        }
+
+        public IEnumerable<ApplicationUser> UsersContainingText(string searchText, int page = 1, int pageSize = 10)
+        {
+            return this.context.Users.Where(u => u.UserName.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }
