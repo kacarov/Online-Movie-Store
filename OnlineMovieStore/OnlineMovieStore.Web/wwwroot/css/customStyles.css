@@ -132,3 +132,7 @@ cursor: pointer;
 a.disabled {
     pointer-events: none;
 }
+
+.orange {
+    color: orange;
+}

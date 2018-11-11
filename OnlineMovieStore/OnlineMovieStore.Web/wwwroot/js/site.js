@@ -8,11 +8,6 @@ $(document).ready(function () {
     })
 });
 
-$(document).ready(function () {
-    debugger;
-    $('#example').DataTable();
-});
-
 $('.flip').hover(function () {
     $(this).find('.card').toggleClass('flipped');
 });
