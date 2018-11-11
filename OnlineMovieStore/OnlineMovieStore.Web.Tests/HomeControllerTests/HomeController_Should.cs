@@ -20,15 +20,13 @@ namespace OnlineMovieStore.Web.Tests.HomeControllerTests
             var moviesService = this.SetupMockService();
             var cacheMock = new Mock<IMemoryCache>();
             var controller = new HomeController(moviesService.Object, cacheMock.Object);
-            var entry = new Mock<ICacheEntry>();
+            Func<ICacheEntry,List<Movie>> mocs = new Mock<Func<ICacheEntry, List<Movie>>>().Object;
 
-          /*  entry
-                .Setup(e => e.AbsoluteExpiration).Returns(new DateTime.UtcNow.AddHours(3));
-
+           
             cacheMock
-                .Setup(c => c.GetOrCreate("s", entry))
-                .
-               */
+                .Setup(c => c.GetOrCreate("s",mocs))
+                .Returns(new List<Movie>());
+         
                 
        
 
