@@ -21,14 +21,10 @@ namespace OnlineMovieStore.Web.Tests.HomeControllerTests
             var cacheMock = new Mock<IMemoryCache>();
             var controller = new HomeController(moviesService.Object, cacheMock.Object);
             Func<ICacheEntry,List<Movie>> mocs = new Mock<Func<ICacheEntry, List<Movie>>>().Object;
-
-           
+         
             cacheMock
                 .Setup(c => c.GetOrCreate("s",mocs))
-                .Returns(new List<Movie>());
-         
-                
-       
+                .Returns(new List<Movie>());     
 
             var result = controller.Index();
 

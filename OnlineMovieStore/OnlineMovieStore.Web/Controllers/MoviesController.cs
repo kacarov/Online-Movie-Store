@@ -63,10 +63,15 @@ namespace OnlineMovieStore.Web.Controllers
         [HttpPost]
         public IActionResult Details(MoviesViewModel model)
         {
-            string userId = this.userManager.GetUserId(User);
-            this.moviesService.BuyMovie(model.Title, userId);
+            if (this.ModelState.IsValid)
+            {
 
-            return RedirectToAction("Details", "Movies", new { title = $"{model.Title}" });
+                string userId = this.userManager.GetUserId(User);
+                this.moviesService.BuyMovie(model.Title, userId);
+
+                return RedirectToAction("Details", "Movies", new { title = $"{model.Title}" });
+            }
+            return this.View(model);
         }
     }
 }

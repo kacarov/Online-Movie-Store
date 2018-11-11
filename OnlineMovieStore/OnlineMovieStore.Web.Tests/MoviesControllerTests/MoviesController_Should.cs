@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,6 +12,7 @@ using OnlineMovieStore.Web.Controllers;
 using OnlineMovieStore.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace OnlineMovieStore.Web.Tests.MoviesControllerTests
 {
@@ -23,18 +26,78 @@ namespace OnlineMovieStore.Web.Tests.MoviesControllerTests
             var usersService = this.SetupMockUsersService();
             var mockUserManager = this.SetupMockUserManager();
             var viewModelMock = new Mock<MovieSearchViewModel>();
-
-         /*   viewModelMock
-                .SetupGet(vm => vm.SearchText)
-                .Returns(It.IsAny<string>());*/
             var controller = new MoviesController(moviesService.Object, mockUserManager.Object, usersService.Object);
             
-
             var result = controller.Index(viewModelMock.Object);
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
 
         }
+
+        [TestMethod]
+        public void IndexAction_ReturnsCorrectViewModel()
+        {
+            var moviesService = this.SetupMockMoviesService();
+            var usersService = this.SetupMockUsersService();
+            var mockUserManager = this.SetupMockUserManager();
+            var viewModelMock = new Mock<MovieSearchViewModel>();
+            var controller = new MoviesController(moviesService.Object, mockUserManager.Object, usersService.Object);
+
+            var result = controller.Index(viewModelMock.Object) as ViewResult;
+
+            Assert.IsInstanceOfType(result.Model, typeof(MovieSearchViewModel));
+
+        }
+
+        [TestMethod]
+        public void IndexAction_CallCorrectServiceMethod()
+        {
+            var moviesService = this.SetupMockMoviesService();
+            var usersService = this.SetupMockUsersService();
+            var mockUserManager = this.SetupMockUserManager();
+            var viewModelMock = new Mock<MovieSearchViewModel>();
+            var controller = new MoviesController(moviesService.Object, mockUserManager.Object, usersService.Object);
+
+            var result = controller.Index(viewModelMock.Object) as ViewResult;
+
+            moviesService.Verify(m => m.ListByContainingText(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()),Times.Once);
+            moviesService.Verify(m => m.TotalContainingText(It.IsAny<string>()), Times.Once);
+
+        }
+
+        [TestMethod]
+        public void DetailsAction_ReturnsRedirectResult()
+        {
+            var controller = this.SetupController();
+            var viewModel = new MoviesViewModel() { Title = "Title", ActorName = "A.FirstName A.LastName",
+                Year = 2018, Price = 20, Description="Description", Genre = new List<GenreMovie>(), IsOwned=true,
+                Image = "ImageURL", TrailerUrl = "TrailerURL", AddedOn= DateTime.Now};
+
+            var result = controller.Details(viewModel);
+
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectResult = (RedirectToActionResult)result;
+            Assert.AreEqual("Details", redirectResult.ActionName);
+            Assert.AreEqual("Movies", redirectResult.ControllerName);
+
+            //Assert.IsNull(redirectResult.RouteValues);
+        }
+
+        [TestMethod]
+        public void PublishAction_InvalidModelState_RedisplaysView()
+        {
+            var controller = this.SetupController();
+            controller.ModelState.AddModelError("error", "error");
+            var viewModel = new MoviesViewModel();
+
+            var result = controller.Details(viewModel);
+
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.Model, typeof(MoviesViewModel));
+            Assert.IsNull(viewResult.ViewName); 
+        }
+
 
         private Mock<IUsersService> SetupMockUsersService()
         {
@@ -83,5 +146,27 @@ namespace OnlineMovieStore.Web.Tests.MoviesControllerTests
                     new Mock<IServiceProvider>().Object,
                     new Mock<ILogger<UserManager<ApplicationUser>>>().Object);
         }
+
+        private MoviesController SetupController()
+        {
+            var moviesService = new Mock<IMoviesService>();
+            var usersService = new Mock<IUsersService>();
+            var user = SetupMockUserManager();
+
+            var controller = new MoviesController(moviesService.Object, user.Object, usersService.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = new DefaultHttpContext()
+                    {
+                        User = new ClaimsPrincipal()
+                    }
+                },
+                TempData = new Mock<ITempDataDictionary>().Object
+            };
+
+            return controller;
+        }
+
     }
 }
