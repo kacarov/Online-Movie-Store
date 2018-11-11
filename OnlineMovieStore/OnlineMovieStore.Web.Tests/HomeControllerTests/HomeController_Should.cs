@@ -4,10 +4,10 @@ using OnlineMovieStore.Web.Controllers;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using OnlineMovieStore.Models.Models;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Mvc;
+using OnlineMovieStore.Web.Models;
 
 namespace OnlineMovieStore.Web.Tests.HomeControllerTests
 {
@@ -17,9 +17,20 @@ namespace OnlineMovieStore.Web.Tests.HomeControllerTests
         [TestMethod]
         public void IndexAction_ReturnsViewResult()
         {
-            var postsServiceMock = this.SetupMockService();
+            var moviesService = this.SetupMockService();
             var cacheMock = new Mock<IMemoryCache>();
-            var controller = new HomeController(postsServiceMock.Object, cacheMock.Object);
+            var controller = new HomeController(moviesService.Object, cacheMock.Object);
+            var entry = new Mock<ICacheEntry>();
+
+          /*  entry
+                .Setup(e => e.AbsoluteExpiration).Returns(new DateTime.UtcNow.AddHours(3));
+
+            cacheMock
+                .Setup(c => c.GetOrCreate("s", entry))
+                .
+               */
+                
+       
 
             var result = controller.Index();
 
