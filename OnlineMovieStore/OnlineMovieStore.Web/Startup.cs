@@ -14,6 +14,8 @@ using OnlineMovieStore.Services.Services;
 using OnlineMovieStore.Services.Services.Contracts;
 using OnlineMovieStore.Web.Areas.Identity.Services;
 using OnlineMovieStore.Web.Data;
+using System;
+using System.Linq;
 
 namespace OnlineMovieStore.Web
 {

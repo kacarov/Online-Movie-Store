@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineMovieStore.Models.Contracts;
 using OnlineMovieStore.Models.Models;
@@ -40,6 +41,37 @@ namespace OnlineMovieStore.Web.Data
 
             modelBuilder.Entity<GenreMovie>()
                  .HasKey(o => new { o.MovieId, o.GenreId });
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(new IdentityRole { Name = "Admin", Id = 1.ToString(), NormalizedName = "Admin".ToUpper(), ConcurrencyStamp = "aaa" });
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(new IdentityRole { Name = "User", Id = 2.ToString(), NormalizedName = "User".ToUpper(), ConcurrencyStamp = "bbb" });
+
+            var adminUser = new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                Balance = 0,
+                UserName = "adminMain",
+                NormalizedUserName = "adminMain".ToUpper(),
+                Email = "admin@mail.com",
+                NormalizedEmail = "admin@mail.com".ToUpper(),
+                EmailConfirmed = true,
+                PhoneNumber = "+111111111",
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+            };
+
+            var hashePass = new PasswordHasher<ApplicationUser>().HashPassword(adminUser, "magicString");
+            adminUser.PasswordHash = hashePass;
+
+            modelBuilder.Entity<ApplicationUser>().HasData(adminUser);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = 1.ToString(),
+                UserId = adminUser.Id
+            });
 
             base.OnModelCreating(modelBuilder);
         }
