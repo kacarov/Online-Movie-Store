@@ -37,7 +37,7 @@
     @{ var id = this.userManager.GetUserId(User);
         double balance = this.userService.GetBalance(id);}
 
-    @if (Model.IsOwned == false && balance <= Model.Price)
+    @if (Model.IsOwned == false && balance >= Model.Price && Model.IsDeleted == false)
     {
         <div>
             <h4>

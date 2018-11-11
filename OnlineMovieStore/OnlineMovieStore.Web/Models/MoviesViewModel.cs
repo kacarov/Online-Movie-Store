@@ -23,8 +23,7 @@ namespace OnlineMovieStore.Web.Models
             this.AddedOn = movie.CreatedOn;
             this.Description = movie.Description;
             this.TrailerUrl = movie.TrailerURL;
-
-
+            this.IsDeleted = movie.IsDeleted;
         }
 
         public string Title { get; set; }
@@ -37,5 +36,6 @@ namespace OnlineMovieStore.Web.Models
         public string Description { get; set; }
         public string TrailerUrl { get; set; }
         public bool IsOwned { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
     }
 }
