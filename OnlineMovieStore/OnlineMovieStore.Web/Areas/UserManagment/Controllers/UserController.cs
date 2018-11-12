@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMovieStore.Models.Models;
 using OnlineMovieStore.Services.Contracts;
@@ -8,6 +9,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
 {
     [Area("UserManagment")]
     [Route("User/[controller]")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUsersService userService;
@@ -24,12 +26,14 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         }
 
         [Route("[action]")]
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
         [Route("[action]/{id}")]
+        [Authorize]
         public IActionResult MyMovies(string id)
         {
             var content = this.userService.Orders(id);
@@ -44,6 +48,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         }
 
         [Route("[action]")]
+        [Authorize]
         public IActionResult OrdersDetails()
         {
             var userOrders = this.userService.OrdersDetails(this.userManager.GetUserId(User));
@@ -62,6 +67,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         // [HttpPost]
         [Route("[action]/{id}")]
         [HttpGet]
+        [Authorize]
         public IActionResult Deposit(string id)
         {
             var user = this.userService.GetUser(id);
@@ -79,7 +85,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         [HttpPost]
         public IActionResult Deposit(UserDepositViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 string id = userManager.GetUserId(User);
                 var u = this.userService.GetUser(id);
@@ -101,6 +107,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         [Route("[action]")]
 
         [HttpGet]
+        [Authorize]
         public IActionResult AccountSettings()
         {
             var user = this.userService.GetUser(this.userManager.GetUserId(User));
@@ -116,9 +123,10 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        [Authorize]
         public IActionResult AccountSettings(UserViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 string id = this.userManager.GetUserId(User);
                 var u = this.userService.GetUser(id);
@@ -153,6 +161,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         // [Authorize]
 
         [Route("[action]")]
+        [Authorize]
         public IActionResult RequestMovie()
         {
             return View();
@@ -161,6 +170,7 @@ namespace OnlineMovieStore.Web.Areas.UserManagment.Controllers
         // [Authorize]
 
         [Route("[action]")]
+        [Authorize]
         public IActionResult Help()
         {
             return View();
